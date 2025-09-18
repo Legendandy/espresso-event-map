@@ -17,6 +17,62 @@ const FlatView = forwardRef(({ onCityClick, selectedCity }, ref) => {
     projection: 'mercator'
   };
 
+  // Add CSS for pulsating animation
+  useEffect(() => {
+    // Check if styles already exist to avoid duplicates
+    if (!document.getElementById('marker-pulse-styles')) {
+      const style = document.createElement('style');
+      style.id = 'marker-pulse-styles';
+      style.textContent = `
+        @keyframes pulsate {
+          0%, 100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.4);
+          }
+        }
+        
+        .marker-pulsate svg {
+          animation: pulsate 0.6s ease-in-out 3;
+          transform-origin: center center;
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  }, []);
+
+  // Function to add pulse animation to marker
+  const addPulseAnimation = (markerElement) => {
+    // Remove existing animation class
+    markerElement.classList.remove('marker-pulsate');
+    
+    // Force reflow to restart animation
+    markerElement.offsetHeight;
+    
+    // Add pulse class
+    markerElement.classList.add('marker-pulsate');
+    
+    // Remove the class after animation completes (3 pulses * 0.6s = 1.8s)
+    setTimeout(() => {
+      markerElement.classList.remove('marker-pulsate');
+    }, 1800);
+  };
+
+  // Function to start continuous pulsing every 1 minute
+  const startContinuousPulsing = (markerElement) => {
+    // Initial pulse
+    addPulseAnimation(markerElement);
+    
+    // Set up interval for pulsing every 1 minute (60000ms)
+    const intervalId = setInterval(() => {
+      addPulseAnimation(markerElement);
+    }, 60000);
+    
+    // Store interval ID on the marker element for cleanup
+    markerElement._pulseInterval = intervalId;
+  };
+
   // Expose map control methods to parent component
   useImperativeHandle(ref, () => ({
     zoomIn: () => {
@@ -110,6 +166,14 @@ const FlatView = forwardRef(({ onCityClick, selectedCity }, ref) => {
 
     return () => {
       if (map.current) {
+        // Clear all pulse intervals before removing map
+        const markers = document.querySelectorAll('.mapboxgl-marker');
+        markers.forEach(markerEl => {
+          if (markerEl._pulseInterval) {
+            clearInterval(markerEl._pulseInterval);
+          }
+        });
+        
         map.current.remove();
         map.current = null;
       }
@@ -164,12 +228,19 @@ const FlatView = forwardRef(({ onCityClick, selectedCity }, ref) => {
             .setLngLat(cityData.coordinates)
             .addTo(map.current);
 
-          // Get marker element for hover events
+          // Get marker element for hover events and animations
           const markerElement = marker.getElement();
+          
+          // Start continuous pulsating (initial + every 1 minute)
+          setTimeout(() => {
+            startContinuousPulsing(markerElement);
+          }, 100);
           
           // Add hover events
           markerElement.addEventListener('mouseenter', () => {
             popup.setLngLat(cityData.coordinates).addTo(map.current);
+            // Add pulse on hover
+            addPulseAnimation(markerElement);
           });
           
           markerElement.addEventListener('mouseleave', () => {
@@ -179,6 +250,8 @@ const FlatView = forwardRef(({ onCityClick, selectedCity }, ref) => {
           // Click event (no popup, just navigation)
           markerElement.addEventListener('click', () => {
             console.log(`Clicked past event: ${cityName}`);
+            // Add pulse on click
+            addPulseAnimation(markerElement);
             onCityClick && onCityClick(cityName, 'past');
             map.current.flyTo({
               center: cityData.coordinates,
@@ -225,12 +298,19 @@ const FlatView = forwardRef(({ onCityClick, selectedCity }, ref) => {
             .setLngLat(cityData.coordinates)
             .addTo(map.current);
 
-          // Get marker element for hover events
+          // Get marker element for hover events and animations
           const markerElement = marker.getElement();
+          
+          // Start continuous pulsating (initial + every 1 minute)
+          setTimeout(() => {
+            startContinuousPulsing(markerElement);
+          }, 100);
           
           // Add hover events
           markerElement.addEventListener('mouseenter', () => {
             popup.setLngLat(cityData.coordinates).addTo(map.current);
+            // Add pulse on hover
+            addPulseAnimation(markerElement);
           });
           
           markerElement.addEventListener('mouseleave', () => {
@@ -240,6 +320,8 @@ const FlatView = forwardRef(({ onCityClick, selectedCity }, ref) => {
           // Click event (no popup, just navigation)
           markerElement.addEventListener('click', () => {
             console.log(`Clicked upcoming event: ${cityName}`);
+            // Add pulse on click
+            addPulseAnimation(markerElement);
             onCityClick && onCityClick(cityName, 'upcoming');
             map.current.flyTo({
               center: cityData.coordinates,
@@ -277,6 +359,14 @@ const FlatView = forwardRef(({ onCityClick, selectedCity }, ref) => {
           zoom: 10,
           duration: 2000
         });
+        
+        // Find and pulse the selected city marker
+        setTimeout(() => {
+          const markers = document.querySelectorAll('.mapboxgl-marker');
+          markers.forEach(markerEl => {
+            addPulseAnimation(markerEl);
+          });
+        }, 500);
       }
     }
   }, [selectedCity, isLoaded]);
@@ -306,7 +396,7 @@ const FlatView = forwardRef(({ onCityClick, selectedCity }, ref) => {
       <div className="w-full h-full flex items-center justify-center bg-gray-100">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-400 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading Mapbox...</p>
+          <p className="text-gray-600">Loading...</p>
         </div>
       </div>
     );
