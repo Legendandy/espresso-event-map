@@ -9,17 +9,39 @@ const FlatView = forwardRef(({ onCityClick, selectedCity, onMapLoad }, ref) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [mapboxgl, setMapboxgl] = useState(null);
   const [error, setError] = useState(null);
+  const [isDesktop, setIsDesktop] = useState(false);
 
-  // Default flat map settings
   const defaultSettings = {
     center: [0, 20],
     zoom: 2,
     projection: 'mercator'
   };
 
-  // Add CSS for pulsating animation
+  const connectionSequence = [
+    { name: 'San Francisco', coordinates: [-122.4194, 37.7749] },
+    { name: 'Denver', coordinates: [-104.9903, 39.7392] },
+    { name: 'New York', coordinates: [-74.0059, 40.7128] },
+    { name: 'Buenos Aires', coordinates: [-58.3816, -34.6037] },
+    { name: 'Cannes', coordinates: [7.0167, 43.5528] },
+    { name: 'Brussels', coordinates: [4.3517, 50.8503] },
+    { name: 'Berlin', coordinates: [13.4050, 52.5200] },
+    { name: 'Seoul', coordinates: [126.9780, 37.5665] },
+    { name: 'Bangkok', coordinates: [100.5018, 13.7563] }
+  ];
+
   useEffect(() => {
-    // Check if styles already exist to avoid duplicates
+    const checkDevice = () => {
+      const isMobile = window.innerWidth <= 768 || 
+                      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      setIsDesktop(!isMobile);
+    };
+    
+    checkDevice();
+    window.addEventListener('resize', checkDevice);
+    return () => window.removeEventListener('resize', checkDevice);
+  }, []);
+
+  useEffect(() => {
     if (!document.getElementById('marker-pulse-styles')) {
       const style = document.createElement('style');
       style.id = 'marker-pulse-styles';
@@ -37,43 +59,202 @@ const FlatView = forwardRef(({ onCityClick, selectedCity, onMapLoad }, ref) => {
           animation: pulsate 0.6s ease-in-out 3;
           transform-origin: center center;
         }
+
+        @keyframes connectionPulse {
+          0% {
+            opacity: 0;
+            transform: scale(0.8);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.2);
+          }
+          100% {
+            opacity: 0.7;
+            transform: scale(1);
+          }
+        }
+
+        .connection-marker {
+          animation: connectionPulse 1s ease-in-out;
+        }
       `;
       document.head.appendChild(style);
     }
   }, []);
 
-  // Function to add pulse animation to marker
+  const createAnimatedLine = (start, end, connectionIndex) => {
+    if (!map.current || !mapboxgl) return Promise.resolve(null);
+
+    return new Promise((resolve) => {
+      const lineSourceId = `connection-line-${connectionIndex}`;
+      const lineLayerId = `connection-layer-${connectionIndex}`;
+      
+      const animationDuration = 800;
+      const startTime = performance.now();
+      
+      if (!map.current.getSource(lineSourceId)) {
+        map.current.addSource(lineSourceId, {
+          type: 'geojson',
+          data: {
+            type: 'Feature',
+            geometry: {
+              type: 'LineString',
+              coordinates: [start]
+            }
+          }
+        });
+
+        map.current.addLayer({
+          id: lineLayerId,
+          type: 'line',
+          source: lineSourceId,
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round'
+          },
+          paint: {
+            'line-color': '#FF6B35',
+            'line-width': 4,
+            'line-opacity': 0.9
+          }
+        });
+      }
+
+      const animate = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / animationDuration, 1);
+        
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
+        
+        const currentLng = start[0] + (end[0] - start[0]) * easedProgress;
+        const currentLat = start[1] + (end[1] - start[1]) * easedProgress;
+        
+        if (map.current.getSource(lineSourceId)) {
+          map.current.getSource(lineSourceId).setData({
+            type: 'Feature',
+            geometry: {
+              type: 'LineString',
+              coordinates: [start, [currentLng, currentLat]]
+            }
+          });
+        }
+        
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          resolve({ lineSourceId, lineLayerId });
+        }
+      };
+      
+      requestAnimationFrame(animate);
+    });
+  };
+
+  const pulseSpecificCity = (coordinates) => {
+    if (!map.current) return;
+
+    const markers = document.querySelectorAll('.mapboxgl-marker');
+    markers.forEach(markerEl => {
+      const marker = markerEl._marker;
+      if (marker) {
+        const markerCoords = marker.getLngLat();
+        const distance = Math.sqrt(
+          Math.pow(markerCoords.lng - coordinates[0], 2) + 
+          Math.pow(markerCoords.lat - coordinates[1], 2)
+        );
+        
+        if (distance < 1) {
+          addPulseAnimation(markerEl);
+        }
+      }
+    });
+  };
+
+  const cleanupConnectionLines = () => {
+    if (!map.current) return;
+    
+    for (let i = 0; i < connectionSequence.length - 1; i++) {
+      const lineLayerId = `connection-layer-${i}`;
+      const lineSourceId = `connection-line-${i}`;
+      
+      if (map.current.getLayer(lineLayerId)) {
+        map.current.removeLayer(lineLayerId);
+      }
+      if (map.current.getSource(lineSourceId)) {
+        map.current.removeSource(lineSourceId);
+      }
+    }
+  };
+
+  const startConnectionAnimation = async () => {
+    if (!isDesktop || !map.current || !isLoaded) return;
+    
+    for (let i = 0; i < connectionSequence.length - 1; i++) {
+      const startCity = connectionSequence[i];
+      const endCity = connectionSequence[i + 1];
+      
+      pulseSpecificCity(startCity.coordinates);
+      
+      await createAnimatedLine(startCity.coordinates, endCity.coordinates, i);
+      
+      pulseSpecificCity(endCity.coordinates);
+      
+      await new Promise(resolve => setTimeout(resolve, 300));
+    }
+    
+    setTimeout(() => {
+      cleanupConnectionLines();
+    }, 2000);
+  };
+
   const addPulseAnimation = (markerElement) => {
-    // Remove existing animation class
     markerElement.classList.remove('marker-pulsate');
-    
-    // Force reflow to restart animation
     markerElement.offsetHeight;
-    
-    // Add pulse class
     markerElement.classList.add('marker-pulsate');
     
-    // Remove the class after animation completes (3 pulses * 0.6s = 1.8s)
     setTimeout(() => {
       markerElement.classList.remove('marker-pulsate');
     }, 1800);
   };
 
-  // Function to start continuous pulsing every 1 minute
   const startContinuousPulsing = (markerElement) => {
-    // Initial pulse
     addPulseAnimation(markerElement);
     
-    // Set up interval for pulsing every 1 minute (60000ms)
     const intervalId = setInterval(() => {
       addPulseAnimation(markerElement);
     }, 60000);
     
-    // Store interval ID on the marker element for cleanup
     markerElement._pulseInterval = intervalId;
   };
 
-  // Expose map control methods to parent component
+  useEffect(() => {
+    if (!isDesktop || !isLoaded) return;
+
+    let connectionInterval;
+    let animationRunning = false;
+
+    const runAnimation = async () => {
+      if (animationRunning) return;
+      animationRunning = true;
+      await startConnectionAnimation();
+      animationRunning = false;
+    };
+
+    const initialTimeout = setTimeout(() => {
+      runAnimation();
+    }, 5000);
+
+    connectionInterval = setInterval(() => {
+      runAnimation();
+    }, 120000);
+
+    return () => {
+      clearTimeout(initialTimeout);
+      clearInterval(connectionInterval);
+    };
+  }, [isDesktop, isLoaded]);
+
   useImperativeHandle(ref, () => ({
     zoomIn: () => {
       if (map.current) {
@@ -99,21 +280,17 @@ const FlatView = forwardRef(({ onCityClick, selectedCity, onMapLoad }, ref) => {
     }
   }));
 
-  // Load Mapbox GL JS and CSS dynamically
   useEffect(() => {
     const loadMapbox = async () => {
       try {
-        // Import Mapbox CSS
         const css = document.createElement('link');
         css.rel = 'stylesheet';
         css.href = 'https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css';
         document.head.appendChild(css);
 
-        // Dynamic import of mapbox-gl
         const mapboxModule = await import('mapbox-gl');
         const mapboxGl = mapboxModule.default;
         
-        // Check if token exists
         const token = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
         
         if (!token) {
@@ -125,7 +302,6 @@ const FlatView = forwardRef(({ onCityClick, selectedCity, onMapLoad }, ref) => {
         setMapboxgl(mapboxGl);
         
       } catch (error) {
-        console.error('Error loading Mapbox:', error);
         setError('Failed to load Mapbox: ' + error.message);
       }
     };
@@ -133,7 +309,6 @@ const FlatView = forwardRef(({ onCityClick, selectedCity, onMapLoad }, ref) => {
     loadMapbox();
   }, []);
 
-  // Initialize map
   useEffect(() => {
     if (!mapboxgl || !mapContainer.current || map.current) return;
 
@@ -148,28 +323,23 @@ const FlatView = forwardRef(({ onCityClick, selectedCity, onMapLoad }, ref) => {
 
       map.current.on('load', () => {
         setIsLoaded(true);
-        // Add markers immediately after map loads and state is updated
         setTimeout(() => addCityMarkers(), 100);
         
-        // Call the parent callback
         if (onMapLoad) {
           onMapLoad();
         }
       });
 
       map.current.on('error', (e) => {
-        console.error('Map error:', e);
         setError('Map failed to load. Check your token permissions.');
       });
 
     } catch (error) {
-      console.error('Map initialization error:', error);
       setError('Failed to initialize map: ' + error.message);
     }
 
     return () => {
       if (map.current) {
-        // Clear all pulse intervals before removing map
         const markers = document.querySelectorAll('.mapboxgl-marker');
         markers.forEach(markerEl => {
           if (markerEl._pulseInterval) {
@@ -184,27 +354,13 @@ const FlatView = forwardRef(({ onCityClick, selectedCity, onMapLoad }, ref) => {
   }, [mapboxgl]);
 
   const addCityMarkers = () => {
-    if (!map.current || !mapboxgl) {
-      return;
-    }
-
-    if (!eventData) {
-      console.error('eventData is undefined!');
-      return;
-    }
+    if (!map.current || !mapboxgl || !eventData) return;
 
     try {
-      let markerCount = 0;
-
-      // Add past events markers
       if (eventData.pastEvents) {
         Object.entries(eventData.pastEvents).forEach(([cityName, cityData]) => {
-          if (!cityData.coordinates || !Array.isArray(cityData.coordinates)) {
-            console.error(`Invalid coordinates for ${cityName}:`, cityData.coordinates);
-            return;
-          }
+          if (!cityData.coordinates || !Array.isArray(cityData.coordinates)) return;
 
-          // Create popup (but don't attach it to marker yet)
           const popup = new mapboxgl.Popup({ 
             offset: 25,
             closeButton: false,
@@ -225,18 +381,15 @@ const FlatView = forwardRef(({ onCityClick, selectedCity, onMapLoad }, ref) => {
             .setLngLat(cityData.coordinates)
             .addTo(map.current);
 
-          // Get marker element for hover events and animations
           const markerElement = marker.getElement();
+          markerElement._marker = marker;
           
-          // Start continuous pulsating (initial + every 1 minute)
           setTimeout(() => {
             startContinuousPulsing(markerElement);
           }, 100);
           
-          // Add hover events
           markerElement.addEventListener('mouseenter', () => {
             popup.setLngLat(cityData.coordinates).addTo(map.current);
-            // Add pulse on hover
             addPulseAnimation(markerElement);
           });
           
@@ -244,9 +397,7 @@ const FlatView = forwardRef(({ onCityClick, selectedCity, onMapLoad }, ref) => {
             popup.remove();
           });
 
-          // Click event (no popup, just navigation)
           markerElement.addEventListener('click', () => {
-            // Add pulse on click
             addPulseAnimation(markerElement);
             onCityClick && onCityClick(cityName, 'past');
             map.current.flyTo({
@@ -255,20 +406,13 @@ const FlatView = forwardRef(({ onCityClick, selectedCity, onMapLoad }, ref) => {
               duration: 2000
             });
           });
-          
-          markerCount++;
         });
       }
 
-      // Add upcoming events markers
       if (eventData.upcomingEvents) {
         Object.entries(eventData.upcomingEvents).forEach(([cityName, cityData]) => {
-          if (!cityData.coordinates || !Array.isArray(cityData.coordinates)) {
-            console.error(`Invalid coordinates for ${cityName}:`, cityData.coordinates);
-            return;
-          }
+          if (!cityData.coordinates || !Array.isArray(cityData.coordinates)) return;
 
-          // Create popup (but don't attach it to marker yet)
           const popup = new mapboxgl.Popup({ 
             offset: 25,
             closeButton: false,
@@ -289,18 +433,15 @@ const FlatView = forwardRef(({ onCityClick, selectedCity, onMapLoad }, ref) => {
             .setLngLat(cityData.coordinates)
             .addTo(map.current);
 
-          // Get marker element for hover events and animations
           const markerElement = marker.getElement();
+          markerElement._marker = marker;
           
-          // Start continuous pulsating (initial + every 1 minute)
           setTimeout(() => {
             startContinuousPulsing(markerElement);
           }, 100);
           
-          // Add hover events
           markerElement.addEventListener('mouseenter', () => {
             popup.setLngLat(cityData.coordinates).addTo(map.current);
-            // Add pulse on hover
             addPulseAnimation(markerElement);
           });
           
@@ -308,9 +449,7 @@ const FlatView = forwardRef(({ onCityClick, selectedCity, onMapLoad }, ref) => {
             popup.remove();
           });
 
-          // Click event (no popup, just navigation)
           markerElement.addEventListener('click', () => {
-            // Add pulse on click
             addPulseAnimation(markerElement);
             onCityClick && onCityClick(cityName, 'upcoming');
             map.current.flyTo({
@@ -319,21 +458,14 @@ const FlatView = forwardRef(({ onCityClick, selectedCity, onMapLoad }, ref) => {
               duration: 2000
             });
           });
-          
-          markerCount++;
         });
       }
 
-      if (markerCount === 0) {
-        console.warn('No markers were added! Check your event data structure.');
-      }
-
     } catch (error) {
-      console.error('ERROR adding markers:', error);
+      // Silent error handling
     }
   };
 
-  // Handle external city selection
   useEffect(() => {
     if (selectedCity && map.current && isLoaded) {
       const allCities = { ...eventData.pastEvents, ...eventData.upcomingEvents };
@@ -346,7 +478,6 @@ const FlatView = forwardRef(({ onCityClick, selectedCity, onMapLoad }, ref) => {
           duration: 2000
         });
         
-        // Find and pulse the selected city marker
         setTimeout(() => {
           const markers = document.querySelectorAll('.mapboxgl-marker');
           markers.forEach(markerEl => {
@@ -399,7 +530,7 @@ const FlatView = forwardRef(({ onCityClick, selectedCity, onMapLoad }, ref) => {
         <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75">
           <div className="text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-400 mx-auto mb-2"></div>
-            <p className="text-sm text-gray-600">Initializing map...</p>
+            <p className="text-sm text-gray-600">Initializing Espresso map...</p>
           </div>
         </div>
       )}
