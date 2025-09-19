@@ -183,16 +183,20 @@ const EventPanel = ({
 
             {/* Event Image */}
             <div className="w-full bg-gray-50 flex items-center justify-center">
-              <img
-                key={`${currentCityIndex}-${currentEventIndex}-${currentEvent.image}`}
-                src={currentEvent.image}
-                alt={currentEvent.title}
-                className="w-[279px] h-[279px] object-cover rounded-lg"
-                onError={(e) => {
-                  e.target.src = '/images/placeholder-event.jpg';
-                }}
-              />
-            </div>
+  <Image
+    key={`${currentCityIndex}-${currentEventIndex}-${currentEvent.image}`}
+    src={currentEvent.image}
+    alt={currentEvent.title}
+    width={279}
+    height={279}
+    className="object-cover rounded-lg"
+    onError={(e) => {
+      e.target.src = '/images/placeholder-event.jpg';
+    }}
+    placeholder="blur"
+    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAQIAAxEhkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyOiKFhX2XTk" // Small blur placeholder
+  />
+</div>
 
             {/* Event Details */}
             <div className="space-y-3">
