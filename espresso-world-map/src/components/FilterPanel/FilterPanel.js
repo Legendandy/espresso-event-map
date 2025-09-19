@@ -6,6 +6,7 @@ const FilterPanel = ({ onFilterClick, activeFilter }) => {
     isAndroid: false,
     isSafari: false,
     isChrome: false,
+    isFullscreen: false,
     bottomSpacing: 'bottom-20' // default fallback
   });
 
@@ -17,10 +18,20 @@ const FilterPanel = ({ onFilterClick, activeFilter }) => {
       const isSafari = /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
       const isChrome = /Chrome/.test(userAgent);
       
+      // Check if in fullscreen mode
+      const isFullscreen = window.innerHeight === screen.height || 
+                          document.fullscreenElement ||
+                          document.webkitFullscreenElement ||
+                          window.navigator.standalone; // iOS PWA fullscreen
+      
       let bottomSpacing = 'bottom-20'; // default
       
-      // iPhone specific positioning
-      if (isIOS) {
+      // If fullscreen, use reduced spacing for all devices
+      if (isFullscreen) {
+        bottomSpacing = 'bottom-8';
+      }
+      // iPhone specific positioning (when not fullscreen)
+      else if (isIOS) {
         if (isSafari) {
           // iPhone Safari needs more space due to toolbar + home indicator
           bottomSpacing = 'bottom-40';
@@ -32,7 +43,7 @@ const FilterPanel = ({ onFilterClick, activeFilter }) => {
           bottomSpacing = 'bottom-36';
         }
       }
-      // Android specific positioning
+      // Android specific positioning (when not fullscreen)
       else if (isAndroid) {
         if (isChrome) {
           // Android Chrome
@@ -48,11 +59,35 @@ const FilterPanel = ({ onFilterClick, activeFilter }) => {
         isAndroid,
         isSafari,
         isChrome,
+        isFullscreen,
         bottomSpacing
       });
     };
 
+    // Initial detection
     detectDevice();
+    
+    // Listen for fullscreen changes
+    const handleFullscreenChange = () => {
+      detectDevice();
+    };
+    
+    const handleResize = () => {
+      detectDevice();
+    };
+
+    // Add event listeners for fullscreen detection
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
+    
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
+    };
   }, []);
 
   return (
