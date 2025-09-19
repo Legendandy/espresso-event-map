@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const UniversalFilterPanel = ({ onFilterClick, activeFilter }) => {
+const FilterPanel = ({ onFilterClick, activeFilter }) => {
   return (
     <>
       <style jsx>{`
@@ -113,5 +113,4 @@ const UniversalFilterPanel = ({ onFilterClick, activeFilter }) => {
     </>
   );
 };
-
 export default FilterPanel;
