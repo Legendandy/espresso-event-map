@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const MapControls = ({ onZoomIn, onZoomOut, onResetMap }) => {
   const [isResetHovered, setIsResetHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   return (
     <div className="absolute bottom-4 left-4 flex flex-col gap-3 z-20">
-      {/* Zoom Controls */}
       <div className="flex flex-col bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200">
         <button
           onClick={onZoomIn}
@@ -25,15 +36,14 @@ const MapControls = ({ onZoomIn, onZoomOut, onResetMap }) => {
         </button>
       </div>
       
-      {/* Reset Map Button */}
       <button
         onClick={onResetMap}
-        onMouseEnter={() => setIsResetHovered(true)}
-        onMouseLeave={() => setIsResetHovered(false)}
+        onMouseEnter={() => !isMobile && setIsResetHovered(true)}
+        onMouseLeave={() => !isMobile && setIsResetHovered(false)}
         className="relative w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm hover:bg-gray-100 rounded-lg shadow-lg border border-gray-200 transition-colors duration-200 overflow-visible"
         title="Reset Map"
       >
-        {isResetHovered ? (
+        {!isMobile && isResetHovered ? (
           <span 
             className="absolute left-0 text-sm font-medium whitespace-nowrap bg-white/90 backdrop-blur-sm hover:bg-gray-100 rounded-lg shadow-lg border border-gray-200 px-3 py-2 transition-all duration-300 ease-in-out"
             style={{ color: '#270903' }}
