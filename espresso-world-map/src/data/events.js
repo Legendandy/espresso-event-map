@@ -43,19 +43,11 @@ export const eventData = {
   startTime: '09:00',
   endTime: '16:00',
   timezone: 'MST',
-  description: (
-    <>
-      <span style={{fontSize: '18.5px', fontWeight: 'bold'}}>
-        Come hang out and work with us during EthDenver. We'll have tasty coffee, delicious food, strong WiFi, plenty of outlets, and great company.
-      </span>
-      <br /><br />
-      
-      Our teams will be there from 9AM - 4PM on both Thursday, 2/29 and Friday, 3/1.
-      <br /><br />
+  description: `Come hang out and work with us during EthDenver. We\'ll escape this, delicious food, strong WiFi, plenty of outlets, and great company.
 
-      ​​​Looking forward to seeing you there.
-    </>
-  ),
+Our teams will be there from 9AM - 4PM on both Thursday, 2/29 and Friday, 3/1.
+
+​​​Looking forward to seeing you there.`,
   image: '/denver2.avif',
   registrationLink: 'https://luma.com/opencafeethdenver1' 
 },

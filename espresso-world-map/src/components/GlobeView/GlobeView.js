@@ -342,7 +342,7 @@ const MapboxGlobeView = forwardRef(({ onCityClick, selectedCity }, ref) => {
             <p className="mb-2">Troubleshooting steps:</p>
             <ul className="list-disc list-inside space-y-1">
               <li>Check your .env.local file exists</li>
-              <li>Verify token starts with 'pk.'</li>
+              <li>Verify token starts with pk.</li>
               <li>Restart your dev server</li>
               <li>Check token permissions on Mapbox</li>
             </ul>
