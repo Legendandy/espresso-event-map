@@ -305,6 +305,141 @@ Light bites & soft drinks will be provided to keep us fueled for an exciting con
           image: '/s3.avif',
           registrationLink: 'https://luma.com/zoyxa7tw'
         },
+      	{
+          id: 1,
+          title: 'Espresso Systems Private Dinner: ETHSF 🌉',
+          date: '2025-03-13',
+          startTime: '19:30',
+          endTime: '22:00',
+          timezone: 'PDT',
+          description: `​You're Invited to a private dinner with the Espresso Systems team! We can't wait to nosh, mingle, and catch up with you. Please keep your RSVP updated since space is limited!
+
+​7:30PM Thursday March 13 @ Wayfare Tavern`,
+          image: '/s4.avif',
+          registrationLink: 'https://luma.com/vsl07psq'
+        },
+      	{
+          id: 1,
+          title: 'Espresso Brews: ETHSF 🌃',
+          date: '2025-03-14',
+          startTime: '16:00',
+          endTime: '18:00',
+          timezone: 'PDT',
+          description: `SF is BACK baby and so are our series of Espresso Brews. Brought to you by Espresso Systems and Electric Capital, we're ready to have a few drinks and catch up during the ETHSF week.
+
+​See you at 4PM on Friday Mar 14 at your local favorite, Zeitgeist!
+
+​______________
+
+​​Entry is on a first come, first serve basis. We have a space for 50 people blocked off at the bar and will not be able to accept more. Having a ticket does not guarantee entry.
+
+​​Notice of photography: There will be event photographers present throughout the duration of the event. By entering the event premises, you consent to recording media and its release, publication, exhibition or reproduction.`,
+          image: '/s5.avif',
+          registrationLink: 'https://luma.com/0tmbxwr5'
+        },
+      	{
+          id: 1,
+          title: 'ETHGlobal SF Happy Hour',
+          date: '2025-03-27',
+          startTime: '17:00',
+          endTime: '19:30',
+          timezone: 'PDT',
+          description: `Join us for the ETHGlobal Happy Hour in San Francisco! 🍻✨
+
+​We're gathering all the crypto folks in SF for an evening filled with great conversations, new connections, and plenty of crypto chatter.
+
+​See you there!`,
+          image: '/s6.avif',
+          registrationLink: 'https://luma.com/ethglobal-happyhour-sf-mar'
+        },
+      	{
+          id: 1,
+          title: 'ETHGlobal SF Happy Hour April',
+          date: '2025-04-24',
+          startTime: '17:00',
+          endTime: '19:30',
+          timezone: 'PDT',
+          description: `Join us for the ETHGlobal Happy Hour in San Francisco! 🍻✨
+
+​We're gathering all the crypto folks in SF for an evening filled with great conversations, new connections, and plenty of crypto chatter.
+
+​See you there!`,
+          image: '/s6.avif',
+          registrationLink: 'https://luma.com/ethglobal-happyhour-sf-apr'
+        },
+      	{
+          id: 1,
+          title: 'ETHGlobal SF Happy Hour May',
+          date: '2025-05-22',
+          startTime: '17:30',
+          endTime: '19:30',
+          timezone: 'PDT',
+          description: `​Join us for the ETHGlobal Happy Hour in San Francisco! 🍻✨
+
+​We're gathering all the crypto folks in SF for an evening filled with great conversations, new connections, and plenty of crypto chatter.
+
+​See you there!`,
+          image: '/s7.avif',
+          registrationLink: 'https://luma.com/ethglobal-happyhour-sf-may'
+        },
+      	{
+          id: 1,
+          title: 'ETHGlobal SF Happy Hour June',
+          date: '2025-06-19',
+          startTime: '17:30',
+          endTime: '19:30',
+          timezone: 'PDT',
+          description: `Join us for the ETHGlobal Happy Hour in San Francisco! 🍻✨
+
+​We're gathering all the crypto folks in SF for an evening filled with great conversations, new connections, and plenty of crypto chatter.
+
+​See you there!`,
+          image: '/s8.avif',
+          registrationLink: 'https://luma.com/ethglobal-happyhour-sf-june'
+        },
+      	{
+          id: 1,
+          title: 'Ethereum 10Y Anniversary San Francisco',
+          date: '2025-07-30',
+          startTime: '16:00',
+          endTime: '22:00',
+          timezone: 'PDT',
+          description: `Join us in celebrating Ethereum's 10 Year Anniversary in San Francisco! 🍻✨
+
+​There will be food/drinks, live music, arts installation, frontier tech exhibition, and a talk by Tomasz on the next 10 years of Ethereum. Families and kids are welcome.`,
+          image: '/s9.avif',
+          registrationLink: 'https://luma.com/ethereum-10y-sanfrancisco'
+        },
+      	{
+          id: 1,
+          title: 'ETHGlobal SF Happy Hour SBC Edito',
+          date: '2025-08-06',
+          startTime: '18:00',
+          endTime: '20:00',
+          timezone: 'PDT',
+          description: `Join us for the ETHGlobal Happy Hour in San Francisco during SBC week! 🍻✨
+
+​We're gathering all the crypto folks in SF for an evening filled with great conversations, new connections, and plenty of crypto chatter.
+
+​See you there!`,
+          image: '/s6.avif',
+          registrationLink: 'https://luma.com/ethglobal-happyhour-sf-aug'
+        },
+      	{
+          id: 1,
+          title: 'ETHGlobal SF Happy Hour September',
+          date: '2025-09-04',
+          startTime: '18:00',
+          endTime: '20:00',
+          timezone: 'PDT',
+          description: `​Join us for the ETHGlobal Happy Hour in San Francisco! 🍻✨
+
+​We're gathering all the crypto folks in SF for an evening filled with great conversations, new connections, and plenty of crypto chatter.
+
+​See you there`,
+          image: '/s10.avif',
+          registrationLink: 'https://luma.com/ethglobal-happyhour-sf-september'
+        }
       ]
     },
     'New York': {
@@ -356,6 +491,61 @@ Looking forward to seeing you there.`,
           image: '/ny3.avif',
           registrationLink: 'https://luma.com/h58ns95b'
         },
+      	{
+          id: 1,
+          title: 'ETHCash X Espresso Cafe',
+          date: '2025-05-02',
+          startTime: '09:00',
+          endTime: '16:00',
+          timezone: 'EDT',
+          description: `Attending Farcon Summit on May 2 in Brooklyn?? We have your coffee needs covered.
+
+​ETHCash and Espresso Systems are teaming up to bring you the trendy blockchain/NY cafe experience you didn't know you needed; just around the corner from Farcon.
+
+​Stop by the cutest Brooklyn Cafe, Butler, for FREE coffee and pastries to fuel up before the next talk, or have a catch up with your mates.`,
+          image: '/ny4.avif',
+          registrationLink: 'https://luma.com/knwyrgwh'
+        },
+    	{
+          id: 1,
+          title: 'Espresso Brews Permissionless 🏙️',
+          date: '2025-06-24',
+          startTime: '16:00',
+          endTime: '19:00',
+          timezone: 'EDT',
+          description: `Permissionless in Brooklyn?? In summer?? Say less.
+
+​Espresso will be hosting another Espresso Brews to gather all brew lovers for a drink and chat on the first day of Permissionless. Right across the street from the venue, we'd love to see you!!
+
+​(we may or may not passing out the NEW edition of our Ethereum United jerseys at this event 😏)`,
+          image: '/ny5.avif',
+          registrationLink: 'https://luma.com/yb17pn9g'
+        },
+      	{
+          id: 1,
+          title: 'Permissionless Poker Night',
+          date: '2025-06-25',
+          startTime: '18:30',
+          endTime: '22:00',
+          timezone: 'EDT',
+          description: `Join us at the Arch Office during NFT NYC and Permissionless for Poker Night.
+
+Whether you're all-in for tokens or aiming to stack some chips, this is where DeFi meets poker face.
+
+What’s On the Table?
+
+🖐 5 Tables for the ultimate poker experience, hosted by industry leaders and innovators.
+🍸 Drinks and food on the house
+🤌 Dealers and payouts managed by Arch – choose your rewards in cash, Venmo, or crypto. Around $3k in prizes up for grabs!
+
+Bring your game face and join fellow degens in a night of networking, play, and high rewards.
+
+Secure your spot at the table and see who comes out on top!
+
+Note: Advance sign-up is essential to reserve your seat. Spaces are limited, so don’t miss out! ♠️`,
+          image: '/ny6.avif',
+          registrationLink: 'https://luma.com/6wq1h1f2'
+        },
       ]
     },
     'Cannes': {
@@ -364,15 +554,49 @@ Looking forward to seeing you there.`,
       events: [
         {
           id: 5,
-          title: 'European Coffee Festival',
-          date: '2023-07-12',
-          startTime: '11:00',
+          title: 'Espresso Beach Mocktails & Aperitif 🍻',
+          date: '2025-06-29',
+          startTime: '19:00',
+          endTime: '21:30',
+          timezone: 'GMT+2',
+          description: `​Sunset, sand, new frens, old frens, a mocktail & fromage. 🥂 Join Espresso Systems for a laid-back beach hang at Plage Macé! No dress code, no agenda—just good vibes, great company, and maybe a little networking (if you’re into that sort of thing).
+
+​We'll provide mocktails (cause we can't drink on public beaches boo) & snacks & some blankets to chill on.
+
+​Peep our newest Ethereum United jersey that you'll also have exclusive access to 🙊`,
+          image: '/c1.avif',
+          registrationLink: 'https://luma.com/08iy7hnp'
+        },
+      	{
+          id: 1,
+          title: 'Espresso & 5K',
+          date: '2025-07-01',
+          startTime: '08:00',
+          endTime: '09:00',
+          timezone: 'GMT+2',
+          description: `​Keep up the fit routine during hot crypto summer and call it "networking"! Join us for a chill 5K run along the French oceanside, starting with an espresso (duh) and ending in a croissant.
+
+​Starting at 9AM from Lollocaffeé, and ending at the same location, we'll do a loop along the waterfront. (the real ones will do an ocean dip along the way)`,
+          image: '/c2.avif',
+          registrationLink: 'https://luma.com/u7bbm3cn'
+        },
+    	{
+          id: 1,
+          title: 'Ethereum United: Pétanque',
+          date: '2025-07-03',
+          startTime: '16:00',
           endTime: '19:00',
-          timezone: 'CEST',
-          description: 'French Riviera meets coffee excellence',
-          image: '/images/placeholder-event.jpg',
-          registrationLink: 'https://example.com/cannes-coffee-festival-2023' // Add your actual link here
-        }
+          timezone: 'GMT+2',
+          description: `Uniting Ethereum one pétanque game at a time!
+
+​We're bringing our "Ethereum United" series to Cannes with a friendly (or mildly competitive) few games of pétanque at the official Cannes pétanque grounds.
+
+​Vin, apertifs, and Ethereum United jerseys provided 🥂
+
+​We'll have 5 courts reserved for the full group, so depending on when you arrive, you won't be guaranteed a spot to play. It'll be casual and mostly fun, friendly games, no official score keeping.`,
+          image: '/c3.avif',
+          registrationLink: 'https://luma.com/h0lmohx9'
+        },
       ]
     },
     'Bangkok': {
@@ -722,14 +946,24 @@ We are uniting the Ethereum community for two pub nights during EthCC Brussels.
       events: [
         {
           id: 8,
-          title: 'Berlin Coffee Innovation Lab',
-          date: '2023-12-01',
-          startTime: '15:00',
-          endTime: '21:00',
-          timezone: 'CET',
-          description: 'German precision meets coffee passion',
-          image: '/images/placeholder-event.jpg',
-          registrationLink: 'https://example.com/berlin-innovation-2023' // Add your actual link here
+          title: 'Crypto x Badminton',
+          date: '2025-06-20',
+          startTime: '12:00',
+          endTime: '14:00',
+          timezone: 'GMT+2',
+          description: `​No talks. No pitches. Just smashes.
+
+Need to wind down after a crazy blockchain week? Trade rallies instead of tokens and connect with others the old-fashioned way, through smashing shuttles.
+
+​No gear? No problem.
+
+We’ve got rackets and shuttles covered. We have 3 available badminton courts. Please wear/bring workout shoes!
+
+​Whether you're a seasoned player or just here for the fun, come play!
+
+​Limited spots available`,
+          image: '/be1.avif',
+          registrationLink: 'https://luma.com/u407uyxp'
         }
       ]
     }
