@@ -249,7 +249,7 @@ Light bites & soft drinks will be provided to keep us fueled for an exciting con
 ​Join us for a hands-on workshop to build multi-chain apps and test cross-chain swaps on Gwyneth's upcoming devnet, see L1<>L2 synchronous composability live, and enjoy some donuts. 🍩`,
           image: '/d8.avif',
           registrationLink: 'https://luma.com/o2446knk'
-        },
+        }
       ]
     },
     'San Francisco': {
@@ -269,7 +269,7 @@ Light bites & soft drinks will be provided to keep us fueled for an exciting con
 
 ​​See you there!`,
           image: '/s1.avif',
-          registrationLink: 'https://luma.com/8c1ujjp9' // Add your actual link here
+          registrationLink: 'https://luma.com/8c1ujjp9'
         },
       	{
           id: 1,
@@ -412,7 +412,7 @@ Light bites & soft drinks will be provided to keep us fueled for an exciting con
         },
       	{
           id: 1,
-          title: 'ETHGlobal SF Happy Hour SBC Edito',
+          title: 'ETHGlobal SF Happy Hour SBC Edition',
           date: '2025-08-06',
           startTime: '18:00',
           endTime: '20:00',
@@ -545,7 +545,7 @@ Secure your spot at the table and see who comes out on top!
 Note: Advance sign-up is essential to reserve your seat. Spaces are limited, so don’t miss out! ♠️`,
           image: '/ny6.avif',
           registrationLink: 'https://luma.com/6wq1h1f2'
-        },
+        }
       ]
     },
     'Cannes': {
@@ -596,7 +596,7 @@ Note: Advance sign-up is essential to reserve your seat. Spaces are limited, so 
 ​We'll have 5 courts reserved for the full group, so depending on when you arrive, you won't be guaranteed a spot to play. It'll be casual and mostly fun, friendly games, no official score keeping.`,
           image: '/c3.avif',
           registrationLink: 'https://luma.com/h0lmohx9'
-        },
+        }
       ]
     },
     'Bangkok': {
@@ -811,7 +811,7 @@ Doors open at 10am, with keynotes and panels scheduled to commence straight afte
 ​ในงานจะมีบุฟเฟ่ต์อาหารกลางวันและเครื่องดื่มชา/กาแฟให้บริการตลอดทั้งวัน`,
           image: '/ba4.avif',
           registrationLink: 'https://luma.com/sequencing_day'
-        },
+        }
       ]
     },
     'Brussels': {
@@ -881,7 +881,7 @@ Apply now
 
 - ​3:30PM-4:30PM: Sequencer & Builder Market Design, Co-moderators: Benedikt Bünz (Espresso) and Pranav Garimidi (a16z research)`,
           image: '/br1.avif',
-          registrationLink: 'https://luma.com/sequence-cake-ethcc' // Add your actual link here
+          registrationLink: 'https://luma.com/sequence-cake-ethcc'
         },
       	{
           id: 1,
@@ -937,7 +937,7 @@ We are uniting the Ethereum community for two pub nights during EthCC Brussels.
 ​Please note that entry will be first-come-first-serve and the space holds 80 people total capacity.`,
           image: '/br3.avif',
           registrationLink: 'https://luma.com/ud8p6oww'
-        },
+        }
       ]
     },
     'Berlin': {
@@ -1077,7 +1077,7 @@ registrationLink: 'https://luma.com/z4vmc849'
           timezone: '',
           description: `COMING SOON`,
           image: '/buenos.png',
-          registrationLink: '' // Add your actual link here
+          registrationLink: ''
         }
       ]
     }
