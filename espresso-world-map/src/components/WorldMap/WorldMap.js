@@ -203,7 +203,7 @@ const WorldMap = () => {
             <div className="pr-8">
               <h2 className="text-2xl font-bold text-gray-800 mb-4">Welcome to Espresso World Map</h2>
               <p className="text-gray-600 mb-6">
-                Explore our events around the world! Click on the markers to see where we've been or discover when we might be coming to your city.
+                `Explore our events around the world! Click on the markers to see where we've been or discover when we might be coming to your city.`
               </p>
               
               <div className="space-y-3 mb-6">
