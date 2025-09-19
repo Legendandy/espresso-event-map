@@ -1,6 +1,6 @@
 const FilterPanel = ({ onFilterClick, activeFilter }) => {
   return (
-    <div className="absolute left-6 top-1/2 transform -translate-y-1/2 z-40 space-y-4">
+    <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 sm:left-6 sm:top-1/2 sm:-translate-y-1/2 sm:translate-x-0 z-40 flex flex-row sm:flex-col space-x-4 sm:space-x-0 sm:space-y-4">
       
       <button
         onClick={() => onFilterClick('past')}
