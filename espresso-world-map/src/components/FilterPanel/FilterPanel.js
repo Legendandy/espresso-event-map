@@ -1,116 +1,122 @@
 import { useState, useEffect } from 'react';
 
 const FilterPanel = ({ onFilterClick, activeFilter }) => {
-  return (
-    <>
-      <style jsx>{`
-        .universal-positioning {
-          /* Mobile-first: bottom center */
-          position: absolute;
-          bottom: max(env(safe-area-inset-bottom, 0px) + 2rem, 3rem);
-          left: 50%;
-          transform: translateX(-50%);
-          z-index: 40;
-          
-          /* Use viewport units for true universality */
-          width: calc(100vw - 4rem);
-          max-width: 20rem;
-          display: flex;
-          flex-direction: row;
-          gap: 1rem;
-        }
-        
-        /* Desktop positioning */
-        @media (min-width: 640px) {
-          .universal-positioning {
-            bottom: auto;
-            left: 1.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            width: auto;
-            max-width: none;
-            flex-direction: column;
-          }
-        }
-        
-        /* Dynamic height detection for better mobile support */
-        @media (max-height: 600px) {
-          .universal-positioning {
-            bottom: max(env(safe-area-inset-bottom, 0px) + 1rem, 2rem);
-          }
-        }
-        
-        /* Landscape mobile optimization */
-        @media (max-width: 640px) and (orientation: landscape) {
-          .universal-positioning {
-            bottom: max(env(safe-area-inset-bottom, 0px) + 1rem, 1.5rem);
-          }
-        }
-        
-        /* Universal button styling */
-        .universal-button {
-          width: 10rem;
-          padding: 0.75rem 1rem;
-          border-radius: 0.5rem;
-          font-weight: 500;
-          transition: all 0.2s ease;
-          border: none;
-          cursor: pointer;
-          
-          /* Ensure visibility on all backgrounds */
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        }
-        
-        /* Hover effects that work universally */
-        .universal-button:hover {
-          transform: translateY(-1px);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Active states */
-        .universal-button:active {
-          transform: translateY(0);
-        }
-        
-        /* Responsive text sizing */
-        @media (max-width: 640px) {
-          .universal-button {
-            font-size: 0.875rem;
-            padding: 0.625rem 0.875rem;
-          }
-        }
-      `}</style>
+  const [deviceInfo, setDeviceInfo] = useState({
+    isIOS: false,
+    isAndroid: false,
+    isSafari: false,
+    isChrome: false,
+    isFullscreen: false,
+    bottomSpacing: 'bottom-20'
+  });
+
+  useEffect(() => {
+    const detectDevice = () => {
+      const userAgent = navigator.userAgent;
+      const isIOS = /iPad|iPhone|iPod/.test(userAgent);
+      const isAndroid = /Android/.test(userAgent);
+      const isSafari = /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
+      const isChrome = /Chrome/.test(userAgent);
       
-      <div className="universal-positioning">
-        <button
-          onClick={() => onFilterClick('past')}
-          className={`universal-button ${
-            activeFilter === 'past'
-              ? 'text-white'
-              : 'text-white hover:opacity-90'
-          }`}
-          style={{
-            backgroundColor: activeFilter === 'past' ? '#8B4513' : '#A0522D'
-          }}
-        >
-          Past Events
-        </button>
-        
-        <button
-          onClick={() => onFilterClick('upcoming')}
-          className={`universal-button ${
-            activeFilter === 'upcoming'
-              ? 'text-white'
-              : 'text-white hover:opacity-90'
-          }`}
-          style={{
-            backgroundColor: activeFilter === 'upcoming' ? '#D2691E' : '#CD853F'
-          }}
-        >
-          Upcoming Events
-        </button>
-      </div>
-    </>
+      // Check if in fullscreen mode
+      const isFullscreen = window.innerHeight === screen.height || 
+                          document.fullscreenElement ||
+                          document.webkitFullscreenElement ||
+                          window.navigator.standalone; // iOS PWA fullscreen
+      
+      let bottomSpacing = 'bottom-20'; // default
+      
+      // If fullscreen, use reduced spacing for all devices
+      if (isFullscreen) {
+        bottomSpacing = 'bottom-8';
+      }
+      // iPhone specific positioning (when not fullscreen)
+      else if (isIOS) {
+        if (isSafari) {
+          // iPhone Safari needs more space due to toolbar + home indicator
+          bottomSpacing = 'bottom-40';
+        } else if (isChrome) {
+          // iPhone Chrome
+          bottomSpacing = 'bottom-36';
+        } else {
+          // Other iOS browsers
+          bottomSpacing = 'bottom-36';
+        }
+      }
+      // Android specific positioning (when not fullscreen)
+      else if (isAndroid) {
+        if (isChrome) {
+          // Android Chrome
+          bottomSpacing = 'bottom-24';
+        } else {
+          // Other Android browsers
+          bottomSpacing = 'bottom-28';
+        }
+      }
+      
+      setDeviceInfo({
+        isIOS,
+        isAndroid,
+        isSafari,
+        isChrome,
+        isFullscreen,
+        bottomSpacing
+      });
+    };
+
+    // Initial detection
+    detectDevice();
+    
+    // Listen for fullscreen changes
+    const handleFullscreenChange = () => {
+      detectDevice();
+    };
+    
+    const handleResize = () => {
+      detectDevice();
+    };
+
+    // Add event listeners for fullscreen detection
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
+    
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
+    };
+  }, []);
+
+  return (
+    <div className={`absolute ${deviceInfo.bottomSpacing} left-1/2 transform -translate-x-1/2 sm:left-6 sm:top-1/2 sm:-translate-y-1/2 sm:translate-x-0 z-40 flex flex-row sm:flex-col space-x-4 sm:space-x-0 sm:space-y-4`}>
+      
+      <button
+        onClick={() => onFilterClick('past')}
+        className={`block w-40 py-3 px-4 rounded-lg font-medium transition-all duration-200 ${
+          activeFilter === 'past'
+            ? 'bg-espresso-dark text-white shadow-lg'
+            : 'bg-espresso-dark text-white hover:shadow-md'
+        }`}
+      >
+        Past Events
+      </button>
+      
+     
+      <button
+        onClick={() => onFilterClick('upcoming')}
+        className={`block w-40 py-3 px-4 rounded-lg font-medium transition-all duration-200 ${
+          activeFilter === 'upcoming'
+            ? 'bg-espresso-light text-white shadow-lg'
+            : 'bg-espresso-light text-white hover:shadow-md'
+        }`}
+      >
+        Upcoming Events
+      </button>
+    </div>
   );
 };
+
 export default FilterPanel;
