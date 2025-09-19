@@ -18,22 +18,22 @@ const FilterPanel = ({ onFilterClick, activeFilter }) => {
       const isSafari = /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
       const isChrome = /Chrome/.test(userAgent);
       
-      // Check if in fullscreen mode
+      
       const isFullscreen = window.innerHeight === screen.height || 
                           document.fullscreenElement ||
                           document.webkitFullscreenElement ||
-                          window.navigator.standalone; // iOS PWA fullscreen
+                          window.navigator.standalone; 
       
-      let bottomSpacing = 'bottom-20'; // default
+      let bottomSpacing = 'bottom-20'; 
       
-      // If fullscreen, use reduced spacing for all devices
+      
       if (isFullscreen) {
         bottomSpacing = 'bottom-8';
       }
-      // iPhone specific positioning (when not fullscreen)
+
       else if (isIOS) {
         if (isSafari) {
-          // iPhone Safari needs more space due to toolbar + home indicator
+          
           bottomSpacing = 'bottom-40';
         } else if (isChrome) {
           // iPhone Chrome
