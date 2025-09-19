@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, X, Calendar } from 'lucide-react';
+import Image from 'next/image';
 
 const EventPanel = ({ 
   isOpen, 
