@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState, useImperativeHandle, forwardRef } from 'react';
 import { eventData } from '../../data/events';
 
-const FlatView = forwardRef(({ onCityClick, selectedCity }, ref) => {
+const FlatView = forwardRef(({ onCityClick, selectedCity, onMapLoad }, ref) => {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -115,7 +115,6 @@ const FlatView = forwardRef(({ onCityClick, selectedCity }, ref) => {
         
         // Check if token exists
         const token = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
-        console.log('Token check:', token ? 'Token found' : 'No token');
         
         if (!token) {
           setError('Mapbox token not found. Check your .env.local file.');
@@ -148,10 +147,14 @@ const FlatView = forwardRef(({ onCityClick, selectedCity }, ref) => {
       });
 
       map.current.on('load', () => {
-        console.log('Map loaded successfully');
         setIsLoaded(true);
         // Add markers immediately after map loads and state is updated
         setTimeout(() => addCityMarkers(), 100);
+        
+        // Call the parent callback
+        if (onMapLoad) {
+          onMapLoad();
+        }
       });
 
       map.current.on('error', (e) => {
@@ -181,10 +184,7 @@ const FlatView = forwardRef(({ onCityClick, selectedCity }, ref) => {
   }, [mapboxgl]);
 
   const addCityMarkers = () => {
-    console.log('=== ADDING MARKERS ===');
-    
     if (!map.current || !mapboxgl) {
-      console.log('Cannot add markers: missing map or mapboxgl');
       return;
     }
 
@@ -198,10 +198,7 @@ const FlatView = forwardRef(({ onCityClick, selectedCity }, ref) => {
 
       // Add past events markers
       if (eventData.pastEvents) {
-        console.log('Adding past event markers...');
         Object.entries(eventData.pastEvents).forEach(([cityName, cityData]) => {
-          console.log(`Adding past event marker for: ${cityName}`, cityData);
-          
           if (!cityData.coordinates || !Array.isArray(cityData.coordinates)) {
             console.error(`Invalid coordinates for ${cityName}:`, cityData.coordinates);
             return;
@@ -249,7 +246,6 @@ const FlatView = forwardRef(({ onCityClick, selectedCity }, ref) => {
 
           // Click event (no popup, just navigation)
           markerElement.addEventListener('click', () => {
-            console.log(`Clicked past event: ${cityName}`);
             // Add pulse on click
             addPulseAnimation(markerElement);
             onCityClick && onCityClick(cityName, 'past');
@@ -262,16 +258,11 @@ const FlatView = forwardRef(({ onCityClick, selectedCity }, ref) => {
           
           markerCount++;
         });
-      } else {
-        console.log('No past events data found');
       }
 
       // Add upcoming events markers
       if (eventData.upcomingEvents) {
-        console.log('Adding upcoming event markers...');
         Object.entries(eventData.upcomingEvents).forEach(([cityName, cityData]) => {
-          console.log(`Adding upcoming event marker for: ${cityName}`, cityData);
-          
           if (!cityData.coordinates || !Array.isArray(cityData.coordinates)) {
             console.error(`Invalid coordinates for ${cityName}:`, cityData.coordinates);
             return;
@@ -319,7 +310,6 @@ const FlatView = forwardRef(({ onCityClick, selectedCity }, ref) => {
 
           // Click event (no popup, just navigation)
           markerElement.addEventListener('click', () => {
-            console.log(`Clicked upcoming event: ${cityName}`);
             // Add pulse on click
             addPulseAnimation(markerElement);
             onCityClick && onCityClick(cityName, 'upcoming');
@@ -332,18 +322,14 @@ const FlatView = forwardRef(({ onCityClick, selectedCity }, ref) => {
           
           markerCount++;
         });
-      } else {
-        console.log('No upcoming events data found');
       }
 
-      console.log(`✅ SUCCESS: ${markerCount} markers added to map!`);
-      
       if (markerCount === 0) {
-        console.warn('❌ WARNING: No markers were added! Check your event data structure.');
+        console.warn('No markers were added! Check your event data structure.');
       }
 
     } catch (error) {
-      console.error('❌ ERROR adding markers:', error);
+      console.error('ERROR adding markers:', error);
     }
   };
 

@@ -1075,7 +1075,7 @@ registrationLink: 'https://luma.com/z4vmc849'
           startTime: '',
           endTime: '',
           timezone: '',
-          description: `COMING SOON`,
+          description: `TBD`,
           image: '/buenos.png',
           registrationLink: ''
         }

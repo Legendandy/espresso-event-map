@@ -98,7 +98,7 @@ const EventPanel = ({
       const [hours, minutes] = timeString.split(':');
       const hour12 = parseInt(hours) % 12 || 12;
       const ampm = parseInt(hours) >= 12 ? 'PM' : 'AM';
-      return `${hour12}:${minutes}${ampm}`;
+      return `${hour12}:${minutes} ${ampm}`;
     };
 
     const formattedStart = formatSingleTime(startTime);

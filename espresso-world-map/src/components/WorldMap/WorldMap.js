@@ -17,12 +17,37 @@ const WorldMap = () => {
   const [currentCityIndex, setCurrentCityIndex] = useState(0);
   const [currentEventIndex, setCurrentEventIndex] = useState(0);
   const [selectedCity, setSelectedCity] = useState(null);
+  const [showWelcomePopup, setShowWelcomePopup] = useState(false);
+  const [isMapLoaded, setIsMapLoaded] = useState(false);
 
   // Refs to access map methods
   const globeViewRef = useRef(null);
   const flatViewRef = useRef(null);
 
   const { pastCities, upcomingCities } = getAllCities();
+
+  // Handle map load completion
+  const handleMapLoad = () => {
+    setIsMapLoaded(true);
+  };
+
+  // Check if user has visited before and show welcome popup after map loads
+  useEffect(() => {
+    if (isMapLoaded) {
+      const hasVisitedBefore = localStorage.getItem('hasVisitedWorldMap');
+      if (!hasVisitedBefore) {
+        // Small delay to ensure smooth transition after map load
+        setTimeout(() => {
+          setShowWelcomePopup(true);
+        }, 500);
+      }
+    }
+  }, [isMapLoaded]);
+
+  const handleCloseWelcomePopup = () => {
+    setShowWelcomePopup(false);
+    localStorage.setItem('hasVisitedWorldMap', 'true');
+  };
 
   const handleToggleView = () => {
     setViewMode(viewMode === 'globe' ? 'flat' : 'globe');
@@ -182,6 +207,55 @@ const WorldMap = () => {
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
+      {/* Welcome Popup */}
+      {showWelcomePopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+          <div className="bg-white rounded-lg shadow-2xl max-w-md mx-4 p-6 relative">
+            {/* Close button */}
+            <button
+              onClick={handleCloseWelcomePopup}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors duration-200"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Content */}
+            <div className="pr-8">
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">Welcome to Espresso World Map</h2>
+              <p className="text-gray-600 mb-6">
+                Explore our events around the world! Click on the markers to see where we’ve been and discover when we might be coming to your city next.
+              </p>
+              
+              {/* Legend */}
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center">
+                  <svg className="w-6 h-6 mr-3 flex-shrink-0" fill="#DE9E67" viewBox="0 0 24 24">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                  </svg>
+                  <span className="text-sm text-gray-700">Orange markers indicate upcoming events</span>
+                </div>
+                <div className="flex items-center">
+                  <svg className="w-6 h-6 mr-3 flex-shrink-0" fill="#270903" viewBox="0 0 24 24">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                  </svg>
+                  <span className="text-sm text-gray-700">Brown markers indicate past events</span>
+                </div>
+              </div>
+
+              {/* Get Started button */}
+              <button
+                onClick={handleCloseWelcomePopup}
+                className="w-full bg-espresso-light hover:bg-espresso-dark text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200"
+              >
+                Explore the Map
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <Header viewMode={viewMode} onToggleView={handleToggleView} />
       
@@ -198,12 +272,14 @@ const WorldMap = () => {
             ref={globeViewRef}
             onCityClick={handleCityClick} 
             selectedCity={selectedCity}
+            onMapLoad={handleMapLoad}
           />
         ) : (
           <FlatView 
             ref={flatViewRef}
             onCityClick={handleCityClick} 
             selectedCity={selectedCity}
+            onMapLoad={handleMapLoad}
           />
         )}
       </div>
