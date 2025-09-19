@@ -114,7 +114,7 @@ const EventPanel = ({
   const formattedDate = formatDate(currentEvent?.date);
 
   return (
-    <div className="absolute right-0 top-0 bottom-0 w-[420px] bg-panel-bg shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col">
+    <div className="absolute right-0 top-0 bottom-0 w-full sm:w-[420px] bg-panel-bg shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col">
       <style jsx>{`
         .custom-scrollbar {
           scrollbar-width: thin;
