@@ -146,46 +146,6 @@ const WorldMap = () => {
     });
   };
 
-  useEffect(() => {
-    const checkEventDates = () => {
-      const today = new Date();
-      let hasChanges = false;
-
-      Object.entries(eventData.upcomingEvents).forEach(([cityName, cityData]) => {
-        cityData.events.forEach((event, eventIndex) => {
-          const eventDate = new Date(event.date);
-          if (eventDate < today) {
-            if (!eventData.pastEvents[cityName]) {
-              eventData.pastEvents[cityName] = {
-                ...cityData,
-                events: []
-              };
-            }
-            eventData.pastEvents[cityName].events.push(event);
-            
-            eventData.upcomingEvents[cityName].events.splice(eventIndex, 1);
-            
-            if (eventData.upcomingEvents[cityName].events.length === 0) {
-              delete eventData.upcomingEvents[cityName];
-            }
-            
-            hasChanges = true;
-          }
-        });
-      });
-
-      if (hasChanges) {
-        setActiveFilter(prev => prev);
-      }
-    };
-
-    checkEventDates();
-    
-    const interval = setInterval(checkEventDates, 24 * 60 * 60 * 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div className="relative w-full h-screen overflow-hidden">
       {showWelcomePopup && (
