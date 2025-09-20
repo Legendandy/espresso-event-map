@@ -78,6 +78,11 @@ const FlatView = forwardRef(({ onCityClick, selectedCity, onMapLoad }, ref) => {
         .connection-marker {
           animation: connectionPulse 1s ease-in-out;
         }
+
+        /* Mixed marker styles */
+        .mixed-marker svg {
+          fill: url(#mixedGradient) !important;
+        }
       `;
       document.head.appendChild(style);
     }
@@ -357,109 +362,146 @@ const FlatView = forwardRef(({ onCityClick, selectedCity, onMapLoad }, ref) => {
     if (!map.current || !mapboxgl || !eventData) return;
 
     try {
+      // Get all unique cities and determine their event types
+      const allCities = {};
+      
+      // Track cities with past events
       if (eventData.pastEvents) {
         Object.entries(eventData.pastEvents).forEach(([cityName, cityData]) => {
           if (!cityData.coordinates || !Array.isArray(cityData.coordinates)) return;
-
-          const popup = new mapboxgl.Popup({ 
-            offset: 25,
-            closeButton: false,
-            closeOnClick: false
-          })
-            .setHTML(`
-              <div style="font-family: sans-serif; padding: 8px;">
-                <strong style="color: #270903;">${cityName}</strong><br/>
-                <span style="color: #666;">${cityData.country}</span><br/>
-                <span style="color: #270903; font-size: 12px;">Past Events</span>
-              </div>
-            `);
-
-          const marker = new mapboxgl.Marker({
-            color: '#270903',
-            scale: 1.0
-          })
-            .setLngLat(cityData.coordinates)
-            .addTo(map.current);
-
-          const markerElement = marker.getElement();
-          markerElement._marker = marker;
-          
-          setTimeout(() => {
-            startContinuousPulsing(markerElement);
-          }, 100);
-          
-          markerElement.addEventListener('mouseenter', () => {
-            popup.setLngLat(cityData.coordinates).addTo(map.current);
-            addPulseAnimation(markerElement);
-          });
-          
-          markerElement.addEventListener('mouseleave', () => {
-            popup.remove();
-          });
-
-          markerElement.addEventListener('click', () => {
-            addPulseAnimation(markerElement);
-            onCityClick && onCityClick(cityName, 'past');
-            map.current.flyTo({
-              center: cityData.coordinates,
-              zoom: 10,
-              duration: 2000
-            });
-          });
+          allCities[cityName] = {
+            ...cityData,
+            hasPast: true,
+            hasUpcoming: false
+          };
         });
       }
 
+      // Track cities with upcoming events (and update if they also have past events)
       if (eventData.upcomingEvents) {
         Object.entries(eventData.upcomingEvents).forEach(([cityName, cityData]) => {
           if (!cityData.coordinates || !Array.isArray(cityData.coordinates)) return;
-
-          const popup = new mapboxgl.Popup({ 
-            offset: 25,
-            closeButton: false,
-            closeOnClick: false
-          })
-            .setHTML(`
-              <div style="font-family: sans-serif; padding: 8px;">
-                <strong style="color: #DE9E67;">${cityName}</strong><br/>
-                <span style="color: #666;">${cityData.country}</span><br/>
-                <span style="color: #DE9E67; font-size: 12px;">Upcoming Events</span>
-              </div>
-            `);
-
-          const marker = new mapboxgl.Marker({
-            color: '#DE9E67',
-            scale: 1.0
-          })
-            .setLngLat(cityData.coordinates)
-            .addTo(map.current);
-
-          const markerElement = marker.getElement();
-          markerElement._marker = marker;
           
-          setTimeout(() => {
-            startContinuousPulsing(markerElement);
-          }, 100);
-          
-          markerElement.addEventListener('mouseenter', () => {
-            popup.setLngLat(cityData.coordinates).addTo(map.current);
-            addPulseAnimation(markerElement);
-          });
-          
-          markerElement.addEventListener('mouseleave', () => {
-            popup.remove();
-          });
-
-          markerElement.addEventListener('click', () => {
-            addPulseAnimation(markerElement);
-            onCityClick && onCityClick(cityName, 'upcoming');
-            map.current.flyTo({
-              center: cityData.coordinates,
-              zoom: 10,
-              duration: 2000
-            });
-          });
+          if (allCities[cityName]) {
+            // City already exists with past events, mark it as having both
+            allCities[cityName].hasUpcoming = true;
+          } else {
+            // New city with only upcoming events
+            allCities[cityName] = {
+              ...cityData,
+              hasPast: false,
+              hasUpcoming: true
+            };
+          }
         });
       }
+
+      // Create markers for all cities
+      Object.entries(allCities).forEach(([cityName, cityData]) => {
+        const hasBoth = cityData.hasPast && cityData.hasUpcoming;
+        const hasOnlyPast = cityData.hasPast && !cityData.hasUpcoming;
+        const hasOnlyUpcoming = !cityData.hasPast && cityData.hasUpcoming;
+
+        let markerColor, popupText, eventType;
+
+        if (hasBoth) {
+          markerColor = '#DE9E67'; // Use upcoming color as base for mixed markers
+          popupText = 'Past & Upcoming Events';
+          eventType = 'mixed';
+        } else if (hasOnlyPast) {
+          markerColor = '#270903';
+          popupText = 'Past Events';
+          eventType = 'past';
+        } else {
+          markerColor = '#DE9E67';
+          popupText = 'Upcoming Events';
+          eventType = 'upcoming';
+        }
+
+        const popup = new mapboxgl.Popup({ 
+          offset: 25,
+          closeButton: false,
+          closeOnClick: false
+        })
+          .setHTML(`
+            <div style="font-family: sans-serif; padding: 8px;">
+              <strong style="color: ${hasBoth ? '#DE9E67' : (hasOnlyPast ? '#270903' : '#DE9E67')};">${cityName}</strong><br/>
+              <span style="color: #666;">${cityData.country}</span><br/>
+              <span style="color: ${hasBoth ? '#DE9E67' : (hasOnlyPast ? '#270903' : '#DE9E67')}; font-size: 12px;">${popupText}</span>
+            </div>
+          `);
+
+        const marker = new mapboxgl.Marker({
+          color: markerColor,
+          scale: 1.0
+        })
+          .setLngLat(cityData.coordinates)
+          .addTo(map.current);
+
+        const markerElement = marker.getElement();
+        markerElement._marker = marker;
+        
+        if (hasBoth) {
+          markerElement.classList.add('mixed-marker');
+          
+          // Wait for the SVG to be rendered, then modify it
+          setTimeout(() => {
+            const svg = markerElement.querySelector('svg');
+            if (svg) {
+              // Create the gradient definition
+              const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+              const gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+              gradient.setAttribute('id', `mixedGradient-${cityName.replace(/\s+/g, '')}`);
+              gradient.setAttribute('x1', '0%');
+              gradient.setAttribute('y1', '0%');
+              gradient.setAttribute('x2', '100%');
+              gradient.setAttribute('y2', '0%');
+              
+              const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+              stop1.setAttribute('offset', '50%');
+              stop1.setAttribute('stop-color', '#270903');
+              
+              const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+              stop2.setAttribute('offset', '50%');
+              stop2.setAttribute('stop-color', '#DE9E67');
+              
+              gradient.appendChild(stop1);
+              gradient.appendChild(stop2);
+              defs.appendChild(gradient);
+              svg.insertBefore(defs, svg.firstChild);
+              
+              // Apply the gradient to the path
+              const path = svg.querySelector('path');
+              if (path) {
+                path.setAttribute('fill', `url(#mixedGradient-${cityName.replace(/\s+/g, '')})`);
+              }
+            }
+          }, 100);
+        }
+        
+        setTimeout(() => {
+          startContinuousPulsing(markerElement);
+        }, 100);
+        
+        markerElement.addEventListener('mouseenter', () => {
+          popup.setLngLat(cityData.coordinates).addTo(map.current);
+          addPulseAnimation(markerElement);
+        });
+        
+        markerElement.addEventListener('mouseleave', () => {
+          popup.remove();
+        });
+
+        markerElement.addEventListener('click', () => {
+          addPulseAnimation(markerElement);
+          onCityClick && onCityClick(cityName, eventType);
+          map.current.flyTo({
+            center: cityData.coordinates,
+            zoom: 10,
+            duration: 2000
+          });
+        });
+      });
 
     } catch (error) {
       // Silent error handling

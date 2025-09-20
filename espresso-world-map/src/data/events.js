@@ -6,199 +6,14 @@ export const eventData = {
       events: [
         {
           id: 1,
-          title: 'Back to the Future Cocktail Night',
-          date: '2024-02-26',
-          startTime: '19:00',
-          endTime: '00:00',
-          timezone: 'MST',
-          description: `Cocktails, presentations, panels and tech showcases - what's not to love?
-
-​We're taking it back to the future at ETHDenver with an evening exploring what the future of Ethereum might look like, bringing an internet-infra-like experience and performance to Web3. Think app chains, shared sequencers and RISC-V coprocessors, blending Linux Virtual Machines with a shot of Espresso.
-
-​Agenda
-- ​7:00 - 7:30 PM - Happy hour starts!
-- ​7:30 - 7:50 PM - Presentation: From world computer to world cloud - Carsten Munk, Cartesi Foundation Board Director
-- ​8:00 - 8:45 PM - Ethereum 2033 Panel
-- ​8:45 - 9:05 PM - Break for drinks and networking
-- ​9:05 - 9:50 PM - AltVM Fireside chat + Q&A
-- ​9:50 PM - 12:00 AM - Showcases & Networking
-
-​💵 Price:
-
-​​​​- Free — limited tickets!
-- ​​First come first served for entry on the day.
-
-​​​​📍 Location:
-
-​​- Denver, USA
-
-​​​​🍻 Cocktails, beers and light snacks will be served.`,
-          image: '/denver1.avif',
-          registrationLink: 'https://luma.com/backtothefuture'
-        },
-        {
-  id: 2,
-  title: 'Open Cafe at ETHDenver',
-  date: '2024-02-29',
-  startTime: '09:00',
-  endTime: '16:00',
-  timezone: 'MST',
-  description: `Come hang out and work with us during EthDenver. We\'ll escape this, delicious food, strong WiFi, plenty of outlets, and great company.
-
-Our teams will be there from 9AM - 4PM on both Thursday, 2/29 and Friday, 3/1.
-
-​​​Looking forward to seeing you there.`,
-  image: '/denver2.avif',
-  registrationLink: 'https://luma.com/opencafeethdenver1' 
-},
-{
-          id: 1,
-          title: 'Espresso Builders Happy Hour',
-          date: '2024-03-01',
-          startTime: '17:00',
-          endTime: '20:00',
-          timezone: 'MST',
-          description: `Calling all Arbinauts and L2 builders!
-
-​Going to ETHDenver and planning on attending the Arbitrum Shake Shack takeover on March 1st?
-
-​We’ll be hosting a happy hour right next door. Join us from 5-8pm to learn more about our work in the Arbitrum ecosystem and meet the Espresso team! ☕
-
-​Food and drinks on us.
-
-​*Entry is on a first come, first serve basis as capacity is limited.`,
-          image: '/dver3.svg',
-          registrationLink: 'https://luma.com/EBHH'
-        },
-  {
-          id: 1,
-          title: 'Beyond the Base Layer',
-          date: '2024-03-02',
-          startTime: '10:00',
-          endTime: '19:00',
-          timezone: 'MST',
-          description: `​Join builders from the scaling community for an event focused on the applications we can build on top of L2 infrastructure.
-
-          ​Come enjoy a great lineup of talks and panels, and network with a number of projects building in the space. Need to focus? You can also take advantage of the co-working space on site 😊
-
-​Confirmed Schedule
-
-​- 10AM Opening Words
--​ 10:15AM Build on Base Fireside with Jesse Pollak and Mike Ippolito
-- ​10:40AM Carsten Munk, Cartesi Foundation
-- ​11AM DA Panel with Sreeram Kannan, Benedikt Bünz, John Adler, Dan Mills, and Fezyla Mokrani-Zemour
-- ​11:55AM Sequencer Panel with Ben Fisch, Josh Bowen, Adrian Brink, Sam Kazemain, and Kydo 0x
-- ​12:30PM Lunch Break @ Local Drive
-- ​1PM Maria Shen, Electric Capital
-- ​1:30PM Daniel Lumi, Matter Labs
-- ​1:45PM Avi Zurlo, =nil; Foundation
-- ​2PM Joao Garcia, Cartesi Project
-- ​2:15PM Austin Marrazza, Offchain Labs
-- ​2:40PM Ben Fisch, Espresso Systems
-- ​3PM Neel Somani, Eclipse
-- ​3:20PM Brendan Farmer, Polygon
-- ​3:45PM The Alignment Fireside with Cem Ozer, Austin Marrazza, and Avichal Garg
-- ​4:25PM Decentralization Panel with Cooper Kunz, Porter Adams, Mike Neuder, and Red Sheehan
-- ​5PM Victor Sanchez, Kinto
-- ​5:20PM Closing Words
-- ​5:30PM Happy Hour @ Local Drive
-
-​Small breakfast bites will be served in the conference space. Lunch served 12:30pm-1pm at the Local Drive next door. Coffee, water and other NA beverages will be served throughout.`,
-          image: '/d4.avif',
-          registrationLink: 'https://luma.com/BTBL'
-        },
-    	{
-          id: 1,
-          title: 'Back to the Future Night - Season 4',
-          date: '2025-02-24',
-          startTime: '18:00',
-          endTime: '23:00',
-          timezone: 'MST',
-          description: `Oh, you thought we wouldn’t keep the Back to the Future series rolling with Cartesi and Espresso in 2025? That’s cute.
-
-​Kick off ETHDenver week with us at the fourth edition of Back to the Future Night—but this time, we’re shaking things up. 👀
-
-​Put your knowledge to the test during the quiz for a chance to win your share of $1,000 in ETH!
-
-​Agenda
-​6:00 PM – Doors Open
-6:30 PM – Welcome & Intro
-7:00 PM – Big Brain Quiz with ETH prizes
-7:30 PM – Networking & Drinks
-
-​​​💵 Tickets:
-
-​​​​- ​First come first served for entry on the day. Regular tickets do not guarantee entry.
-
-​​​​​​​📍 Location:
-
-​​​- Denver
-
-​​​​​​​🍻 Cocktails, beers, and light snacks will be served.`,
-          image: '/d5.avif',
-          registrationLink: 'https://luma.com/backtothefuture4'
-        },
-    	{
-          id: 1,
-          title: 't1 & Espresso live workshop on synchronous composability',
-          date: '2025-02-25',
-          startTime: '14:00',
-          endTime: '18:00',
-          timezone: 'MST',
-          description: `Join 𝚝𝟷 and our friends at Espresso for an intimate workshop where we'll discuss synchronous vs. asynchronous composability and their impact on various use-cases. This session is inspired by this twitter thread:
-https://x.com/kisaguncan/status/1882536773609541961
-
-​Our goal is to explore how synchronous composability can be achieved within the context of based sequencing. We’ll whiteboard potential solutions for a gateway-enabled based sequencing world, using cross-chain use cases like swaps and liquidity aggregation as reference points.
-
-This is going to be a small session. We would like to curate a group of researchers, L2 builders, block builders, gateway/preconf. builders, cross-chain applications and bridges/solvers in the room.
-
-If there's a use-case you'd like to present or discuss, please submit ahead of time.
-
-Light bites & soft drinks will be provided to keep us fueled for an exciting conversation about the future of Ethereum!`,
-          image: '/d6.avif',
-          registrationLink: 'https://luma.com/peendh7h'
-        },
-    	{
-          id: 1,
-          title: 'SheFi Summit Denver',
-          date: '2025-02-26',
-          startTime: '10:00',
-          endTime: '19:00',
-          timezone: 'MST',
-          description: `​SheFi Summit is coming to Denver!
-
-​SheFi Summit, crypto’s premier event featuring the best and brightest minds in the space, returns to Denver on February 26. 
-
- ​There’s no event quite like it. And after 4 successful women-led Summits in 2024, this is set to be our best one yet. You can expect:
-
-​💭Thought-provoking panels. Tired of hearing the same speakers on repeat? SheFi Summit brings together diverse crypto and AI leaders to explore cutting-edge topics in an engaging, fresh way.
-
-​🤝Unmatched Networking Opportunities. Attendees consistently report landing exciting new job prospects after the Summit. Whether you’re a crypto pro or a newcomer, you’ll connect with trailblazing brands and people who could transform your career.
-
-​📝Activations. Our sponsors are Web3 leaders, offering interactive quests with real rewards. Mint an art NFT, discover game-changing apps, and experience the tech firsthand. We don’t just talk the talk at SheFi Summit. We walk the walk.
-
-​And in addition to all of this, SheFi Summit is one of the only events guaranteed to keep you hydrated with coffee and water, fed a delicious lunch, and covered head to toe with the best merch in the business. 
-
-​Come for the talks, stay for the vibes. 
-
-​A huge thank you to our sponsors: World of Women, Celo, Espresso, Trust Machines, Polygon, Codebase, Arbitrum, Rari Foundation, Paypal, Harpie, and Sui.
-
-​​If the cost of a ticket is a barrier to attendance, scholarships are available! Please apply here.
-
-​Don’t miss out—join us at SheFi Summit Denver!`,
-          image: '/d7.avif',
-          registrationLink: 'https://luma.com/0xsf7b0j'
-        },
-    	{
-          id: 1,
           title: 'Composability Day ETHDenver',
           date: '2025-02-27',
           startTime: '12:30',
           endTime: '18:00',
           timezone: 'MST',
-          description: `​Join Espresso as we brew a new event in Denver - Composability Day! We’ll have some incredible speakers, white-boarding sessions, and networking, all in the name of Making Ethereum Composable Again.
+          description: `​Join Espresso as we brew a new event in Denver - Composability Day! We'll have some incredible speakers, white-boarding sessions, and networking, all in the name of Making Ethereum Composable Again.
 
-​High quality keynotes will be followed by whiteboarding sessions held by the speakers in a separate quiet space, giving those many Q&A’s unlimited time for expanding those gigabrains.
+​High quality keynotes will be followed by whiteboarding sessions held by the speakers in a separate quiet space, giving those many Q&A's unlimited time for expanding those gigabrains.
 
 ​Be sure to stop by to catch up on the latest with Espresso and the broader composable community. Snacks, refreshments, and kick ass swag will be provided throughout!
 
@@ -241,6 +56,191 @@ Light bites & soft drinks will be provided to keep us fueled for an exciting con
 ​Join us for a hands-on workshop to build multi-chain apps and test cross-chain swaps on Gwyneth's upcoming devnet, see L1<>L2 synchronous composability live, and enjoy some donuts. 🍩`,
           image: '/d8.avif',
           registrationLink: 'https://luma.com/o2446knk'
+        },
+    	{
+          id: 1,
+          title: 'SheFi Summit Denver',
+          date: '2025-02-26',
+          startTime: '10:00',
+          endTime: '19:00',
+          timezone: 'MST',
+          description: `​SheFi Summit is coming to Denver!
+
+​SheFi Summit, crypto's premier event featuring the best and brightest minds in the space, returns to Denver on February 26. 
+
+ ​There's no event quite like it. And after 4 successful women-led Summits in 2024, this is set to be our best one yet. You can expect:
+
+​💭Thought-provoking panels. Tired of hearing the same speakers on repeat? SheFi Summit brings together diverse crypto and AI leaders to explore cutting-edge topics in an engaging, fresh way.
+
+​🤝Unmatched Networking Opportunities. Attendees consistently report landing exciting new job prospects after the Summit. Whether you're a crypto pro or a newcomer, you'll connect with trailblazing brands and people who could transform your career.
+
+​📝Activations. Our sponsors are Web3 leaders, offering interactive quests with real rewards. Mint an art NFT, discover game-changing apps, and experience the tech firsthand. We don't just talk the talk at SheFi Summit. We walk the walk.
+
+​And in addition to all of this, SheFi Summit is one of the only events guaranteed to keep you hydrated with coffee and water, fed a delicious lunch, and covered head to toe with the best merch in the business. 
+
+​Come for the talks, stay for the vibes. 
+
+​A huge thank you to our sponsors: World of Women, Celo, Espresso, Trust Machines, Polygon, Codebase, Arbitrum, Rari Foundation, Paypal, Harpie, and Sui.
+
+​​If the cost of a ticket is a barrier to attendance, scholarships are available! Please apply here.
+
+​Don't miss out—join us at SheFi Summit Denver!`,
+          image: '/d7.avif',
+          registrationLink: 'https://luma.com/0xsf7b0j'
+        },
+    	{
+          id: 1,
+          title: 't1 & Espresso live workshop on synchronous composability',
+          date: '2025-02-25',
+          startTime: '14:00',
+          endTime: '18:00',
+          timezone: 'MST',
+          description: `Join 𝚝𝟷 and our friends at Espresso for an intimate workshop where we'll discuss synchronous vs. asynchronous composability and their impact on various use-cases. This session is inspired by this twitter thread:
+https://x.com/kisaguncan/status/1882536773609541961
+
+​Our goal is to explore how synchronous composability can be achieved within the context of based sequencing. We'll whiteboard potential solutions for a gateway-enabled based sequencing world, using cross-chain use cases like swaps and liquidity aggregation as reference points.
+
+This is going to be a small session. We would like to curate a group of researchers, L2 builders, block builders, gateway/preconf. builders, cross-chain applications and bridges/solvers in the room.
+
+If there's a use-case you'd like to present or discuss, please submit ahead of time.
+
+Light bites & soft drinks will be provided to keep us fueled for an exciting conversation about the future of Ethereum!`,
+          image: '/d6.avif',
+          registrationLink: 'https://luma.com/peendh7h'
+        },
+    	{
+          id: 1,
+          title: 'Back to the Future Night - Season 4',
+          date: '2025-02-24',
+          startTime: '18:00',
+          endTime: '23:00',
+          timezone: 'MST',
+          description: `Oh, you thought we wouldn't keep the Back to the Future series rolling with Cartesi and Espresso in 2025? That's cute.
+
+​Kick off ETHDenver week with us at the fourth edition of Back to the Future Night—but this time, we're shaking things up. 👀
+
+​Put your knowledge to the test during the quiz for a chance to win your share of $1,000 in ETH!
+
+​Agenda
+​6:00 PM – Doors Open
+6:30 PM – Welcome & Intro
+7:00 PM – Big Brain Quiz with ETH prizes
+7:30 PM – Networking & Drinks
+
+​​​💵 Tickets:
+
+​​​​- ​First come first served for entry on the day. Regular tickets do not guarantee entry.
+
+​​​​​​​📍 Location:
+
+​​​- Denver
+
+​​​​​​​🍻 Cocktails, beers, and light snacks will be served.`,
+          image: '/d5.avif',
+          registrationLink: 'https://luma.com/backtothefuture4'
+        },
+        {
+          id: 1,
+          title: 'Beyond the Base Layer',
+          date: '2024-03-02',
+          startTime: '10:00',
+          endTime: '19:00',
+          timezone: 'MST',
+          description: `​Join builders from the scaling community for an event focused on the applications we can build on top of L2 infrastructure.
+
+          ​Come enjoy a great lineup of talks and panels, and network with a number of projects building in the space. Need to focus? You can also take advantage of the co-working space on site 😊
+
+​Confirmed Schedule
+
+​- 10AM Opening Words
+-​ 10:15AM Build on Base Fireside with Jesse Pollak and Mike Ippolito
+- ​10:40AM Carsten Munk, Cartesi Foundation
+- ​11AM DA Panel with Sreeram Kannan, Benedikt Bünz, John Adler, Dan Mills, and Fezyla Mokrani-Zemour
+- ​11:55AM Sequencer Panel with Ben Fisch, Josh Bowen, Adrian Brink, Sam Kazemain, and Kydo 0x
+- ​12:30PM Lunch Break @ Local Drive
+- ​1PM Maria Shen, Electric Capital
+- ​1:30PM Daniel Lumi, Matter Labs
+- ​1:45PM Avi Zurlo, =nil; Foundation
+- ​2PM Joao Garcia, Cartesi Project
+- ​2:15PM Austin Marrazza, Offchain Labs
+- ​2:40PM Ben Fisch, Espresso Systems
+- ​3PM Neel Somani, Eclipse
+- ​3:20PM Brendan Farmer, Polygon
+- ​3:45PM The Alignment Fireside with Cem Ozer, Austin Marrazza, and Avichal Garg
+- ​4:25PM Decentralization Panel with Cooper Kunz, Porter Adams, Mike Neuder, and Red Sheehan
+- ​5PM Victor Sanchez, Kinto
+- ​5:20PM Closing Words
+- ​5:30PM Happy Hour @ Local Drive
+
+​Small breakfast bites will be served in the conference space. Lunch served 12:30pm-1pm at the Local Drive next door. Coffee, water and other NA beverages will be served throughout.`,
+          image: '/d4.avif',
+          registrationLink: 'https://luma.com/BTBL'
+        },
+        {
+          id: 1,
+          title: 'Espresso Builders Happy Hour',
+          date: '2024-03-01',
+          startTime: '17:00',
+          endTime: '20:00',
+          timezone: 'MST',
+          description: `Calling all Arbinauts and L2 builders!
+
+​Going to ETHDenver and planning on attending the Arbitrum Shake Shack takeover on March 1st?
+
+​We'll be hosting a happy hour right next door. Join us from 5-8pm to learn more about our work in the Arbitrum ecosystem and meet the Espresso team! ☕
+
+​Food and drinks on us.
+
+​*Entry is on a first come, first serve basis as capacity is limited.`,
+          image: '/dver3.svg',
+          registrationLink: 'https://luma.com/EBHH'
+        },
+        {
+  id: 2,
+  title: 'Open Cafe at ETHDenver',
+  date: '2024-02-29',
+  startTime: '09:00',
+  endTime: '16:00',
+  timezone: 'MST',
+  description: `Come hang out and work with us during EthDenver. We\'ll escape this, delicious food, strong WiFi, plenty of outlets, and great company.
+
+Our teams will be there from 9AM - 4PM on both Thursday, 2/29 and Friday, 3/1.
+
+​​​Looking forward to seeing you there.`,
+  image: '/denver2.avif',
+  registrationLink: 'https://luma.com/opencafeethdenver1' 
+},
+        {
+          id: 1,
+          title: 'Back to the Future Cocktail Night',
+          date: '2024-02-26',
+          startTime: '19:00',
+          endTime: '00:00',
+          timezone: 'MST',
+          description: `Cocktails, presentations, panels and tech showcases - what's not to love?
+
+​We're taking it back to the future at ETHDenver with an evening exploring what the future of Ethereum might look like, bringing an internet-infra-like experience and performance to Web3. Think app chains, shared sequencers and RISC-V coprocessors, blending Linux Virtual Machines with a shot of Espresso.
+
+​Agenda
+- ​7:00 - 7:30 PM - Happy hour starts!
+- ​7:30 - 7:50 PM - Presentation: From world computer to world cloud - Carsten Munk, Cartesi Foundation Board Director
+- ​8:00 - 8:45 PM - Ethereum 2033 Panel
+- ​8:45 - 9:05 PM - Break for drinks and networking
+- ​9:05 - 9:50 PM - AltVM Fireside chat + Q&A
+- ​9:50 PM - 12:00 AM - Showcases & Networking
+
+​💵 Price:
+
+​​​​- Free — limited tickets!
+- ​​First come first served for entry on the day.
+
+​​​​📍 Location:
+
+​​- Denver, USA
+
+​​​​🍻 Cocktails, beers and light snacks will be served.`,
+          image: '/denver1.avif',
+          registrationLink: 'https://luma.com/backtothefuture'
         }
       ]
     },
@@ -249,66 +249,107 @@ Light bites & soft drinks will be provided to keep us fueled for an exciting con
       coordinates: [-122.4194, 37.7749],
       events: [
         {
-          id: 3,
-          title: 'SF Crypto Happy Hour',
-          date: '2024-06-05',
-          startTime: '16:30',
-          endTime: '17:30',
+          id: 1,
+          title: 'ETHGlobal SF Happy Hour September',
+          date: '2025-09-04',
+          startTime: '18:00',
+          endTime: '20:00',
           timezone: 'PDT',
-          description: `​Come hang out and chat all things crypto with the crypto community in San Francisco.
+          description: `​Join us for the ETHGlobal Happy Hour in San Francisco! 🍻✨
 
-​​There will be tasty drinks, yummy bites, and great company.
+​We're gathering all the crypto folks in SF for an evening filled with great conversations, new connections, and plenty of crypto chatter.
 
-​​See you there!`,
-          image: '/s1.avif',
-          registrationLink: 'https://luma.com/8c1ujjp9'
+​See you there`,
+          image: '/s10.avif',
+          registrationLink: 'https://luma.com/ethglobal-happyhour-sf-september'
         },
       	{
           id: 1,
-          title: 'ETHSF Brews 🍺 ☕️ - The State of ZK with Succinct, Penumbra, & Iron Fish',
-          date: '2024-10-15',
-          startTime: '17:30',
-          endTime: '21:00',
+          title: 'ETHGlobal SF Happy Hour SBC Edition',
+          date: '2025-08-06',
+          startTime: '18:00',
+          endTime: '20:00',
           timezone: 'PDT',
-          description: `​Join us for our second SF Espresso Brews, cohosted by Electric Capital, Iron Fish, Succinct, & Penumbra! We're so excited to host the community during Pragma SF on October 15 at the same location you all know and love - the Interval at Long Now.
+          description: `Join us for the ETHGlobal Happy Hour in San Francisco during SBC week! 🍻✨
 
-​5:30pm: Welcome!
+​We're gathering all the crypto folks in SF for an evening filled with great conversations, new connections, and plenty of crypto chatter.
 
-6pm: kick off with Jill Gunter (Espresso Systems)
-
-​​6-6:30pm: ZK Panel with Elena Nadolinski (Iron Fish), Henry de Valence (Penumbra), and Uma Roy (Succinct) moderated by Curtis Spencer (Electric Capital)
-
-​6:30-9pm: Happy Hour`,
-          image: '/s2.avif',
-          registrationLink: 'https://luma.com/sjv7df6f'
+​See you there!`,
+          image: '/s6.avif',
+          registrationLink: 'https://luma.com/ethglobal-happyhour-sf-aug'
         },
       	{
           id: 1,
-          title: 'SF Crypto Happy Hour',
-          date: '2024-11-21',
+          title: 'Ethereum 10Y Anniversary San Francisco',
+          date: '2025-07-30',
           startTime: '16:00',
-          endTime: '19:00',
-          timezone: 'PST',
-          description: `Come hang out and chat all things crypto with the crypto community in San Francisco.
-
-​​​There will be tasty drinks, yummy bites, and great company.
-
-​​​See you there!`,
-          image: '/s3.avif',
-          registrationLink: 'https://luma.com/zoyxa7tw'
-        },
-      	{
-          id: 1,
-          title: 'Espresso Systems Private Dinner: ETHSF 🌉',
-          date: '2025-03-13',
-          startTime: '19:30',
           endTime: '22:00',
           timezone: 'PDT',
-          description: `​You're Invited to a private dinner with the Espresso Systems team! We can't wait to nosh, mingle, and catch up with you. Please keep your RSVP updated since space is limited!
+          description: `Join us in celebrating Ethereum's 10 Year Anniversary in San Francisco! 🍻✨
 
-​7:30PM Thursday March 13 @ Wayfare Tavern`,
-          image: '/s4.avif',
-          registrationLink: 'https://luma.com/vsl07psq'
+​There will be food/drinks, live music, arts installation, frontier tech exhibition, and a talk by Tomasz on the next 10 years of Ethereum. Families and kids are welcome.`,
+          image: '/s9.avif',
+          registrationLink: 'https://luma.com/ethereum-10y-sanfrancisco'
+        },
+      	{
+          id: 1,
+          title: 'ETHGlobal SF Happy Hour June',
+          date: '2025-06-19',
+          startTime: '17:30',
+          endTime: '19:30',
+          timezone: 'PDT',
+          description: `Join us for the ETHGlobal Happy Hour in San Francisco! 🍻✨
+
+​We're gathering all the crypto folks in SF for an evening filled with great conversations, new connections, and plenty of crypto chatter.
+
+​See you there!`,
+          image: '/s8.avif',
+          registrationLink: 'https://luma.com/ethglobal-happyhour-sf-june'
+        },
+      	{
+          id: 1,
+          title: 'ETHGlobal SF Happy Hour May',
+          date: '2025-05-22',
+          startTime: '17:30',
+          endTime: '19:30',
+          timezone: 'PDT',
+          description: `​Join us for the ETHGlobal Happy Hour in San Francisco! 🍻✨
+
+​We're gathering all the crypto folks in SF for an evening filled with great conversations, new connections, and plenty of crypto chatter.
+
+​See you there!`,
+          image: '/s7.avif',
+          registrationLink: 'https://luma.com/ethglobal-happyhour-sf-may'
+        },
+      	{
+          id: 1,
+          title: 'ETHGlobal SF Happy Hour April',
+          date: '2025-04-24',
+          startTime: '17:00',
+          endTime: '19:30',
+          timezone: 'PDT',
+          description: `Join us for the ETHGlobal Happy Hour in San Francisco! 🍻✨
+
+​We're gathering all the crypto folks in SF for an evening filled with great conversations, new connections, and plenty of crypto chatter.
+
+​See you there!`,
+          image: '/s6.avif',
+          registrationLink: 'https://luma.com/ethglobal-happyhour-sf-apr'
+        },
+      	{
+          id: 1,
+          title: 'ETHGlobal SF Happy Hour',
+          date: '2025-03-27',
+          startTime: '17:00',
+          endTime: '19:30',
+          timezone: 'PDT',
+          description: `Join us for the ETHGlobal Happy Hour in San Francisco! 🍻✨
+
+​We're gathering all the crypto folks in SF for an evening filled with great conversations, new connections, and plenty of crypto chatter.
+
+​See you there!`,
+          image: '/s6.avif',
+          registrationLink: 'https://luma.com/ethglobal-happyhour-sf-mar'
         },
       	{
           id: 1,
@@ -331,106 +372,65 @@ Light bites & soft drinks will be provided to keep us fueled for an exciting con
         },
       	{
           id: 1,
-          title: 'ETHGlobal SF Happy Hour',
-          date: '2025-03-27',
-          startTime: '17:00',
-          endTime: '19:30',
-          timezone: 'PDT',
-          description: `Join us for the ETHGlobal Happy Hour in San Francisco! 🍻✨
-
-​We're gathering all the crypto folks in SF for an evening filled with great conversations, new connections, and plenty of crypto chatter.
-
-​See you there!`,
-          image: '/s6.avif',
-          registrationLink: 'https://luma.com/ethglobal-happyhour-sf-mar'
-        },
-      	{
-          id: 1,
-          title: 'ETHGlobal SF Happy Hour April',
-          date: '2025-04-24',
-          startTime: '17:00',
-          endTime: '19:30',
-          timezone: 'PDT',
-          description: `Join us for the ETHGlobal Happy Hour in San Francisco! 🍻✨
-
-​We're gathering all the crypto folks in SF for an evening filled with great conversations, new connections, and plenty of crypto chatter.
-
-​See you there!`,
-          image: '/s6.avif',
-          registrationLink: 'https://luma.com/ethglobal-happyhour-sf-apr'
-        },
-      	{
-          id: 1,
-          title: 'ETHGlobal SF Happy Hour May',
-          date: '2025-05-22',
-          startTime: '17:30',
-          endTime: '19:30',
-          timezone: 'PDT',
-          description: `​Join us for the ETHGlobal Happy Hour in San Francisco! 🍻✨
-
-​We're gathering all the crypto folks in SF for an evening filled with great conversations, new connections, and plenty of crypto chatter.
-
-​See you there!`,
-          image: '/s7.avif',
-          registrationLink: 'https://luma.com/ethglobal-happyhour-sf-may'
-        },
-      	{
-          id: 1,
-          title: 'ETHGlobal SF Happy Hour June',
-          date: '2025-06-19',
-          startTime: '17:30',
-          endTime: '19:30',
-          timezone: 'PDT',
-          description: `Join us for the ETHGlobal Happy Hour in San Francisco! 🍻✨
-
-​We're gathering all the crypto folks in SF for an evening filled with great conversations, new connections, and plenty of crypto chatter.
-
-​See you there!`,
-          image: '/s8.avif',
-          registrationLink: 'https://luma.com/ethglobal-happyhour-sf-june'
-        },
-      	{
-          id: 1,
-          title: 'Ethereum 10Y Anniversary San Francisco',
-          date: '2025-07-30',
-          startTime: '16:00',
+          title: 'Espresso Systems Private Dinner: ETHSF 🌉',
+          date: '2025-03-13',
+          startTime: '19:30',
           endTime: '22:00',
           timezone: 'PDT',
-          description: `Join us in celebrating Ethereum's 10 Year Anniversary in San Francisco! 🍻✨
+          description: `​You're Invited to a private dinner with the Espresso Systems team! We can't wait to nosh, mingle, and catch up with you. Please keep your RSVP updated since space is limited!
 
-​There will be food/drinks, live music, arts installation, frontier tech exhibition, and a talk by Tomasz on the next 10 years of Ethereum. Families and kids are welcome.`,
-          image: '/s9.avif',
-          registrationLink: 'https://luma.com/ethereum-10y-sanfrancisco'
+​7:30PM Thursday March 13 @ Wayfare Tavern`,
+          image: '/s4.avif',
+          registrationLink: 'https://luma.com/vsl07psq'
         },
       	{
           id: 1,
-          title: 'ETHGlobal SF Happy Hour SBC Edition',
-          date: '2025-08-06',
-          startTime: '18:00',
-          endTime: '20:00',
-          timezone: 'PDT',
-          description: `Join us for the ETHGlobal Happy Hour in San Francisco during SBC week! 🍻✨
+          title: 'SF Crypto Happy Hour',
+          date: '2024-11-21',
+          startTime: '16:00',
+          endTime: '19:00',
+          timezone: 'PST',
+          description: `Come hang out and chat all things crypto with the crypto community in San Francisco.
 
-​We're gathering all the crypto folks in SF for an evening filled with great conversations, new connections, and plenty of crypto chatter.
+​​​There will be tasty drinks, yummy bites, and great company.
 
-​See you there!`,
-          image: '/s6.avif',
-          registrationLink: 'https://luma.com/ethglobal-happyhour-sf-aug'
+​​​See you there!`,
+          image: '/s3.avif',
+          registrationLink: 'https://luma.com/zoyxa7tw'
         },
       	{
           id: 1,
-          title: 'ETHGlobal SF Happy Hour September',
-          date: '2025-09-04',
-          startTime: '18:00',
-          endTime: '20:00',
+          title: 'ETHSF Brews 🍺 ☕️ - The State of ZK with Succinct, Penumbra, & Iron Fish',
+          date: '2024-10-15',
+          startTime: '17:30',
+          endTime: '21:00',
           timezone: 'PDT',
-          description: `​Join us for the ETHGlobal Happy Hour in San Francisco! 🍻✨
+          description: `​Join us for our second SF Espresso Brews, cohosted by Electric Capital, Iron Fish, Succinct, & Penumbra! We're so excited to host the community during Pragma SF on October 15 at the same location you all know and love - the Interval at Long Now.
 
-​We're gathering all the crypto folks in SF for an evening filled with great conversations, new connections, and plenty of crypto chatter.
+​5:30pm: Welcome!
 
-​See you there`,
-          image: '/s10.avif',
-          registrationLink: 'https://luma.com/ethglobal-happyhour-sf-september'
+6pm: kick off with Jill Gunter (Espresso Systems)
+
+​​6-6:30pm: ZK Panel with Elena Nadolinski (Iron Fish), Henry de Valence (Penumbra), and Uma Roy (Succinct) moderated by Curtis Spencer (Electric Capital)
+
+​6:30-9pm: Happy Hour`,
+          image: '/s2.avif',
+          registrationLink: 'https://luma.com/sjv7df6f'
+        },
+        {
+          id: 3,
+          title: 'SF Crypto Happy Hour',
+          date: '2024-06-05',
+          startTime: '16:30',
+          endTime: '17:30',
+          timezone: 'PDT',
+          description: `​Come hang out and chat all things crypto with the crypto community in San Francisco.
+
+​​There will be tasty drinks, yummy bites, and great company.
+
+​​See you there!`,
+          image: '/s1.avif',
+          registrationLink: 'https://luma.com/8c1ujjp9'
         }
       ]
     },
@@ -439,30 +439,59 @@ Light bites & soft drinks will be provided to keep us fueled for an exciting con
       coordinates: [-74.0060, 40.7128],
       events: [
         {
-          id: 4,
-          title: 'Open Cafe at SBC',
-          date: '2024-08-07',
+          id: 1,
+          title: 'Permissionless Poker Night',
+          date: '2025-06-25',
+          startTime: '18:30',
+          endTime: '22:00',
+          timezone: 'EDT',
+          description: `Join us at the Arch Office during NFT NYC and Permissionless for Poker Night.
+
+Whether you're all-in for tokens or aiming to stack some chips, this is where DeFi meets poker face.
+
+What's On the Table?
+
+🖐 5 Tables for the ultimate poker experience, hosted by industry leaders and innovators.
+🍸 Drinks and food on the house
+🤌 Dealers and payouts managed by Arch – choose your rewards in cash, Venmo, or crypto. Around $3k in prizes up for grabs!
+
+Bring your game face and join fellow degens in a night of networking, play, and high rewards.
+
+Secure your spot at the table and see who comes out on top!
+
+Note: Advance sign-up is essential to reserve your seat. Spaces are limited, so don't miss out! ♠️`,
+          image: '/ny6.avif',
+          registrationLink: 'https://luma.com/6wq1h1f2'
+        },
+    	{
+          id: 1,
+          title: 'Espresso Brews Permissionless 🏙️',
+          date: '2025-06-24',
+          startTime: '16:00',
+          endTime: '19:00',
+          timezone: 'EDT',
+          description: `Permissionless in Brooklyn?? In summer?? Say less.
+
+​Espresso will be hosting another Espresso Brews to gather all brew lovers for a drink and chat on the first day of Permissionless. Right across the street from the venue, we'd love to see you!!
+
+​(we may or may not passing out the NEW edition of our Ethereum United jerseys at this event 😏)`,
+          image: '/ny5.avif',
+          registrationLink: 'https://luma.com/yb17pn9g'
+        },
+      	{
+          id: 1,
+          title: 'ETHCash X Espresso Cafe',
+          date: '2025-05-02',
           startTime: '09:00',
           endTime: '16:00',
           timezone: 'EDT',
-          description: `Come hang out and work with us during SBC at Columbia. We'll be across the street with tasty coffee, delicious food, strong WiFi, plenty of outlets, and great company.
-​
-Looking forward to seeing you there.`,
-          image: '/ny1.avif',
-          registrationLink: 'https://luma.com/0h9v6pfm' 
-        },
-        	{
-          id: 1,
-          title: 'SBC Opening Party!',
-          date: '2024-08-07',
-          startTime: '16:00',
-          endTime: '20:00',
-          timezone: 'EDT',
-          description: `Join us for the SBC Opening Party hosted by Espresso Systems, Monad Labs, and Electric Capital. Come and enjoy delicious food and drinks to kick off the conference in style.
+          description: `Attending Farcon Summit on May 2 in Brooklyn?? We have your coffee needs covered.
 
-​​We look forward to seeing you there!`,
-          image: '/ny2.avif',
-          registrationLink: 'https://luma.com/eqprqjt0'
+​ETHCash and Espresso Systems are teaming up to bring you the trendy blockchain/NY cafe experience you didn't know you needed; just around the corner from Farcon.
+
+​Stop by the cutest Brooklyn Cafe, Butler, for FREE coffee and pastries to fuel up before the next talk, or have a catch up with your mates.`,
+          image: '/ny4.avif',
+          registrationLink: 'https://luma.com/knwyrgwh'
         },
         	{
           id: 1,
@@ -483,60 +512,31 @@ Looking forward to seeing you there.`,
           image: '/ny3.avif',
           registrationLink: 'https://luma.com/h58ns95b'
         },
-      	{
+        	{
           id: 1,
-          title: 'ETHCash X Espresso Cafe',
-          date: '2025-05-02',
+          title: 'SBC Opening Party!',
+          date: '2024-08-07',
+          startTime: '16:00',
+          endTime: '20:00',
+          timezone: 'EDT',
+          description: `Join us for the SBC Opening Party hosted by Espresso Systems, Monad Labs, and Electric Capital. Come and enjoy delicious food and drinks to kick off the conference in style.
+
+​​We look forward to seeing you there!`,
+          image: '/ny2.avif',
+          registrationLink: 'https://luma.com/eqprqjt0'
+        },
+        {
+          id: 4,
+          title: 'Open Cafe at SBC',
+          date: '2024-08-07',
           startTime: '09:00',
           endTime: '16:00',
           timezone: 'EDT',
-          description: `Attending Farcon Summit on May 2 in Brooklyn?? We have your coffee needs covered.
-
-​ETHCash and Espresso Systems are teaming up to bring you the trendy blockchain/NY cafe experience you didn't know you needed; just around the corner from Farcon.
-
-​Stop by the cutest Brooklyn Cafe, Butler, for FREE coffee and pastries to fuel up before the next talk, or have a catch up with your mates.`,
-          image: '/ny4.avif',
-          registrationLink: 'https://luma.com/knwyrgwh'
-        },
-    	{
-          id: 1,
-          title: 'Espresso Brews Permissionless 🏙️',
-          date: '2025-06-24',
-          startTime: '16:00',
-          endTime: '19:00',
-          timezone: 'EDT',
-          description: `Permissionless in Brooklyn?? In summer?? Say less.
-
-​Espresso will be hosting another Espresso Brews to gather all brew lovers for a drink and chat on the first day of Permissionless. Right across the street from the venue, we'd love to see you!!
-
-​(we may or may not passing out the NEW edition of our Ethereum United jerseys at this event 😏)`,
-          image: '/ny5.avif',
-          registrationLink: 'https://luma.com/yb17pn9g'
-        },
-      	{
-          id: 1,
-          title: 'Permissionless Poker Night',
-          date: '2025-06-25',
-          startTime: '18:30',
-          endTime: '22:00',
-          timezone: 'EDT',
-          description: `Join us at the Arch Office during NFT NYC and Permissionless for Poker Night.
-
-Whether you're all-in for tokens or aiming to stack some chips, this is where DeFi meets poker face.
-
-What’s On the Table?
-
-🖐 5 Tables for the ultimate poker experience, hosted by industry leaders and innovators.
-🍸 Drinks and food on the house
-🤌 Dealers and payouts managed by Arch – choose your rewards in cash, Venmo, or crypto. Around $3k in prizes up for grabs!
-
-Bring your game face and join fellow degens in a night of networking, play, and high rewards.
-
-Secure your spot at the table and see who comes out on top!
-
-Note: Advance sign-up is essential to reserve your seat. Spaces are limited, so don’t miss out! ♠️`,
-          image: '/ny6.avif',
-          registrationLink: 'https://luma.com/6wq1h1f2'
+          description: `Come hang out and work with us during SBC at Columbia. We'll be across the street with tasty coffee, delicious food, strong WiFi, plenty of outlets, and great company.
+​
+Looking forward to seeing you there.`,
+          image: '/ny1.avif',
+          registrationLink: 'https://luma.com/0h9v6pfm' 
         }
       ]
     },
@@ -545,34 +545,6 @@ Note: Advance sign-up is essential to reserve your seat. Spaces are limited, so 
       coordinates: [7.0167, 43.5528],
       events: [
         {
-          id: 5,
-          title: 'Espresso Beach Mocktails & Aperitif 🍻',
-          date: '2025-06-29',
-          startTime: '19:00',
-          endTime: '21:30',
-          timezone: 'GMT+2',
-          description: `​Sunset, sand, new frens, old frens, a mocktail & fromage. 🥂 Join Espresso Systems for a laid-back beach hang at Plage Macé! No dress code, no agenda—just good vibes, great company, and maybe a little networking (if you’re into that sort of thing).
-
-​We'll provide mocktails (cause we can't drink on public beaches boo) & snacks & some blankets to chill on.
-
-​Peep our newest Ethereum United jersey that you'll also have exclusive access to 🙊`,
-          image: '/c1.avif',
-          registrationLink: 'https://luma.com/08iy7hnp'
-        },
-      	{
-          id: 1,
-          title: 'Espresso & 5K',
-          date: '2025-07-01',
-          startTime: '08:00',
-          endTime: '09:00',
-          timezone: 'GMT+2',
-          description: `​Keep up the fit routine during hot crypto summer and call it "networking"! Join us for a chill 5K run along the French oceanside, starting with an espresso (duh) and ending in a croissant.
-
-​Starting at 9AM from Lollocaffeé, and ending at the same location, we'll do a loop along the waterfront. (the real ones will do an ocean dip along the way)`,
-          image: '/c2.avif',
-          registrationLink: 'https://luma.com/u7bbm3cn'
-        },
-    	{
           id: 1,
           title: 'Ethereum United: Pétanque',
           date: '2025-07-03',
@@ -588,6 +560,34 @@ Note: Advance sign-up is essential to reserve your seat. Spaces are limited, so 
 ​We'll have 5 courts reserved for the full group, so depending on when you arrive, you won't be guaranteed a spot to play. It'll be casual and mostly fun, friendly games, no official score keeping.`,
           image: '/c3.avif',
           registrationLink: 'https://luma.com/h0lmohx9'
+        },
+      	{
+          id: 1,
+          title: 'Espresso & 5K',
+          date: '2025-07-01',
+          startTime: '08:00',
+          endTime: '09:00',
+          timezone: 'GMT+2',
+          description: `​Keep up the fit routine during hot crypto summer and call it "networking"! Join us for a chill 5K run along the French oceanside, starting with an espresso (duh) and ending in a croissant.
+
+​Starting at 9AM from Lollocaffeé, and ending at the same location, we'll do a loop along the waterfront. (the real ones will do an ocean dip along the way)`,
+          image: '/c2.avif',
+          registrationLink: 'https://luma.com/u7bbm3cn'
+        },
+        {
+          id: 5,
+          title: 'Espresso Beach Mocktails & Aperitif 🍻',
+          date: '2025-06-29',
+          startTime: '19:00',
+          endTime: '21:30',
+          timezone: 'GMT+2',
+          description: `​Sunset, sand, new frens, old frens, a mocktail & fromage. 🥂 Join Espresso Systems for a laid-back beach hang at Plage Macé! No dress code, no agenda—just good vibes, great company, and maybe a little networking (if you're into that sort of thing).
+
+​We'll provide mocktails (cause we can't drink on public beaches boo) & snacks & some blankets to chill on.
+
+​Peep our newest Ethereum United jersey that you'll also have exclusive access to 🙊`,
+          image: '/c1.avif',
+          registrationLink: 'https://luma.com/08iy7hnp'
         }
       ]
     },
@@ -596,118 +596,6 @@ Note: Advance sign-up is essential to reserve your seat. Spaces are limited, so 
       coordinates: [100.5018, 13.7563],
       events: [
         {
-          id: 6,
-          title: 'Back to the Future Cocktail Night - Season 3',
-          date: '2024-11-11',
-          startTime: '19:00',
-          endTime: '00:00',
-          timezone: 'GMT+7',
-          description: `​After the success in Denver and Brussels, we had to bring the Back to the Future Cocktail Night back for its third installment! Cartesi and Espresso are teaming up once again, and this time, we're meeting in Bangkok.
-
-​Join us for a night of inspiration, demos of 3 Cartesi dApps integrating Espresso, and overall fun in one of the world's most dynamic cities, with a blend of Linux VM, a shot of Espresso, and a lot of spice. 🐧☕
-
-​​​Agenda:
-
--​ 19:00-20:00 | Drinks and mingling
-- 20:00-20:45 | 🌶️Battle of the VMs🌶️ Panel
-- 20:45 onward | Networking & drinks
-
-​🌶️Battle of the VMs🌶️ Speakers:
-​
-- Augusto (Cartesi)
-- Nick (Fuel)
-- Jim (Catalyst)
-- Dino (Fluent)
-- Rushi (Movement)
-- Terry (Eclipse)
-- Moderated by Alysia (Espresso)
-
-​Integration Corner (Demos)
-
-- ​Drawing Canvas: A digital space for onchain creativity, where users can create collaborative artwork, co-monetize drawings with NFTs, enter contests, and have fun.
-
-- Comet: Co-writing platform where anyone can start the co-creation of a shared rhyme, poem, song, or story that can be minted, with profits distributed evenly among all contributors.
-
-- DCA Monster: The premier decentralized platform for dollar-cost averaging into any token or real-world asset with cross-chain support and optimal price exposure.
-
-​​💵 Price:
-
-​​​​​​- Free — limited tickets!
-- ​​​​First come first served for entry on the day. Tickets do not guarantee entry.
-
-​​​​​​📍 Location:
-
-- ​​Bangkok
-
-​​​​​​🍻 Cocktails, beers, and light snacks will be served.`,
-          image: '/ba1.avif',
-          registrationLink: 'https://luma.com/backtothefuture3' 
-        },
-      	{
-          id: 1,
-          title: 'Espresso Brews Bangkok: DevCon Brews ⚡️',
-          date: '2024-11-12',
-          startTime: '09:00',
-          endTime: '16:00',
-          timezone: 'GMT+7',
-          description: `​Espresso and Electric Capital are bringing Espresso Brews to Devcon! Come for the coffee (espresso) ☕️ stay for the fireside chats 🔥
-
-​9AM - Welcome!
-
-​11AM - 11:30AM - Composability Fireside Chat with Ellie Davidson (Espresso Systems) & Alysia Huggins (Espresso Systems)
-
-​11:30AM-12:30PM - Lunch
-
-​12:30PM - 1PM - DeFi Panel with Curtis S. (Electric Capital), Tasch P. (INFINIT), Daljeet S. (OpenBlock), and Lawrence O. (Espresso Systems)
-
-​1:30PM-2PM - Unichain Panel with Devin Walsh (Uniswap Foundation), Verity Coltman (Espresso Systems), and Zach Wong (Unichain)
-
-​4PM - Close
-
-​We're hosting a full day of coffee, snacks and vibes at 3nvy, right across the street from QSNCC DevCon. Featuring Ellie and Alysia from Espresso Systems, we'll dive into a 12pm fireside chat, tickling your brains on how to keep the Infinite Garden infinite.`,
-          image: '/ba2.avif',
-          registrationLink: 'https://luma.com/f5ezkbwu'
-        },
-    	{
-          id: 1,
-          title: 'Ethereum United: Devcon Edition - Padel & Vibes',
-          date: '2024-11-14',
-          startTime: '08:00',
-          endTime: '20:00',
-          timezone: 'GMT+7',
-          description: `​The best way to relax and unwind after the conference! Picture a day where logos only appear in games, and everyone chills outside.
-​
-Ethereum United is a movement which asserts that Ethereum is more powerful as a united platform, where free and open competition drives us all toward shared goals. We might wear different colors and logos, but we are all fighting for the same outcomes - an open, permissionless system that empowers individuals.
-
-​Schedule Overview:
-
-​8:00 - 9:00 AM: Yoga & Breathwork
-
-​8:00 AM - 12:00 PM: Beginners & Intermediate Tournament
-
-​2:00 - 4:00 PM: Padel Clinics (Learn to play with the pros!)
-
-​4:00 - 7:00 PM: Advanced Tournament & Finals
-
-​6:00 PM - End: Happy Hour & Prize Distribution
-
-​Ongoing Activities:
-​
-- Cold Plunges
-
-- ​Smoothie Station
-
-- ​Light Snacks
-
-- ​15-Minute Sport Massage
-
-- ​And more!
-
-​Please note that the venue has limited capacity, so new attendees will be allowed in on a "one leaves, one enters" basis once we reach total capacity. Those registered for the tournament will have guaranteed entry during tournament hours.`,
-          image: '/ba3.avif',
-          registrationLink: 'https://luma.com/txup0gjx'
-        },
-    	{
           id: 1,
           title: 'Sequencing Day',
           date: '2024-11-15',
@@ -803,6 +691,118 @@ Doors open at 10am, with keynotes and panels scheduled to commence straight afte
 ​ในงานจะมีบุฟเฟ่ต์อาหารกลางวันและเครื่องดื่มชา/กาแฟให้บริการตลอดทั้งวัน`,
           image: '/ba4.avif',
           registrationLink: 'https://luma.com/sequencing_day'
+        },
+    	{
+          id: 1,
+          title: 'Ethereum United: Devcon Edition - Padel & Vibes',
+          date: '2024-11-14',
+          startTime: '08:00',
+          endTime: '20:00',
+          timezone: 'GMT+7',
+          description: `​The best way to relax and unwind after the conference! Picture a day where logos only appear in games, and everyone chills outside.
+​
+Ethereum United is a movement which asserts that Ethereum is more powerful as a united platform, where free and open competition drives us all toward shared goals. We might wear different colors and logos, but we are all fighting for the same outcomes - an open, permissionless system that empowers individuals.
+
+​Schedule Overview:
+
+​8:00 - 9:00 AM: Yoga & Breathwork
+
+​8:00 AM - 12:00 PM: Beginners & Intermediate Tournament
+
+​2:00 - 4:00 PM: Padel Clinics (Learn to play with the pros!)
+
+​4:00 - 7:00 PM: Advanced Tournament & Finals
+
+​6:00 PM - End: Happy Hour & Prize Distribution
+
+​Ongoing Activities:
+​
+- Cold Plunges
+
+- ​Smoothie Station
+
+- ​Light Snacks
+
+- ​15-Minute Sport Massage
+
+- ​And more!
+
+​Please note that the venue has limited capacity, so new attendees will be allowed in on a "one leaves, one enters" basis once we reach total capacity. Those registered for the tournament will have guaranteed entry during tournament hours.`,
+          image: '/ba3.avif',
+          registrationLink: 'https://luma.com/txup0gjx'
+        },
+      	{
+          id: 1,
+          title: 'Espresso Brews Bangkok: DevCon Brews ⚡️',
+          date: '2024-11-12',
+          startTime: '09:00',
+          endTime: '16:00',
+          timezone: 'GMT+7',
+          description: `​Espresso and Electric Capital are bringing Espresso Brews to Devcon! Come for the coffee (espresso) ☕️ stay for the fireside chats 🔥
+
+​9AM - Welcome!
+
+​11AM - 11:30AM - Composability Fireside Chat with Ellie Davidson (Espresso Systems) & Alysia Huggins (Espresso Systems)
+
+​11:30AM-12:30PM - Lunch
+
+​12:30PM - 1PM - DeFi Panel with Curtis S. (Electric Capital), Tasch P. (INFINIT), Daljeet S. (OpenBlock), and Lawrence O. (Espresso Systems)
+
+​1:30PM-2PM - Unichain Panel with Devin Walsh (Uniswap Foundation), Verity Coltman (Espresso Systems), and Zach Wong (Unichain)
+
+​4PM - Close
+
+​We're hosting a full day of coffee, snacks and vibes at 3nvy, right across the street from QSNCC DevCon. Featuring Ellie and Alysia from Espresso Systems, we'll dive into a 12pm fireside chat, tickling your brains on how to keep the Infinite Garden infinite.`,
+          image: '/ba2.avif',
+          registrationLink: 'https://luma.com/f5ezkbwu'
+        },
+        {
+          id: 6,
+          title: 'Back to the Future Cocktail Night - Season 3',
+          date: '2024-11-11',
+          startTime: '19:00',
+          endTime: '00:00',
+          timezone: 'GMT+7',
+          description: `​After the success in Denver and Brussels, we had to bring the Back to the Future Cocktail Night back for its third installment! Cartesi and Espresso are teaming up once again, and this time, we're meeting in Bangkok.
+
+​Join us for a night of inspiration, demos of 3 Cartesi dApps integrating Espresso, and overall fun in one of the world's most dynamic cities, with a blend of Linux VM, a shot of Espresso, and a lot of spice. 🐧☕
+
+​​​Agenda:
+
+-​ 19:00-20:00 | Drinks and mingling
+- 20:00-20:45 | 🌶️Battle of the VMs🌶️ Panel
+- 20:45 onward | Networking & drinks
+
+​🌶️Battle of the VMs🌶️ Speakers:
+​
+- Augusto (Cartesi)
+- Nick (Fuel)
+- Jim (Catalyst)
+- Dino (Fluent)
+- Rushi (Movement)
+- Terry (Eclipse)
+- Moderated by Alysia (Espresso)
+
+​Integration Corner (Demos)
+
+- ​Drawing Canvas: A digital space for onchain creativity, where users can create collaborative artwork, co-monetize drawings with NFTs, enter contests, and have fun.
+
+- Comet: Co-writing platform where anyone can start the co-creation of a shared rhyme, poem, song, or story that can be minted, with profits distributed evenly among all contributors.
+
+- DCA Monster: The premier decentralized platform for dollar-cost averaging into any token or real-world asset with cross-chain support and optimal price exposure.
+
+​​💵 Price:
+
+​​​​​​- Free — limited tickets!
+- ​​​​First come first served for entry on the day. Tickets do not guarantee entry.
+
+​​​​​​📍 Location:
+
+- ​​Bangkok
+
+​​​​​​🍻 Cocktails, beers, and light snacks will be served.`,
+          image: '/ba1.avif',
+          registrationLink: 'https://luma.com/backtothefuture3' 
         }
       ]
     },
@@ -811,69 +811,21 @@ Doors open at 10am, with keynotes and panels scheduled to commence straight afte
       coordinates: [4.3517, 50.8503],
       events: [
         {
-          id: 7,
-          title: 'Sequencing x CAKE day - ETHCC Brussels',
-          date: '2024-07-07',
-          startTime: '09:00',
-          endTime: '19:00',
+          id: 1,
+          title: 'Ethereum United: EURO 2024 Semi-Finals Pub Nights',
+          date: '2024-07-09',
+          startTime: '19:00',
+          endTime: '01:00',
           timezone: 'GMT+2',
-          description: `Join us for a packed, productive day of Sequencing & CAKE discussions!
+          description: `​Hosted by Espresso Systems, Nethermind, Airchains, AltLayer, Ankr, Automata, Caldera, Cartesi, Catalyst, CyberConnect, dWallet, Fhenix, Fluent, Gelato, Hyperlane, Injective, Karnot, Kinto, Omni, ParallelFi, Plume, Polygon, Pragma, RARI, Social Network, Socket, Specular, Superposition, Synonym, Taiko, & Treasure.
 
-This event will have parallel talks and workshops, with a lunch break in the middle and happy hour at the end.
+We are uniting the Ethereum community for two pub nights during EthCC Brussels.
 
-*RSVP ONLY*
+​On July 9 & July 10 from 7pm-1am, we'll bring the open bar, food, FIFA, football jerseys (that you'll actually want to rep), and the ultimate location to watch the EURO 2024 Semi-Finals matches.
 
-Apply now
-
-​Speaking Schedule: 
-
-- ​9AM-9:30AM: Arrival, Breakfast & Coffee
-
-- ​9:30AM-9:35AM: Welcome Message (Ben Fisch) 
-
-- ​9:35AM-9:55AM: Justin Drake (Ethereum Foundation)  “Why is synchrony valuable?”
-
-- ​10:00AM-10:20AM: Ed Felten (Offchain Labs) "Timeboost: Ethical and Efficient Revenue from MEV" 
-
-- ​10:25AM-10:45AM: dmarz (Flashbots) “Sequencer preconfs with TEEs” 
-
-- ​10:50AM-11:10AM: Benedikt Buenz (Espresso) “On designing a marketplace for sequencing”
-
-- ​11:15AM-11:35AM: Karthik Srinivasan (Sorella Labs) “Ordering sovereign applications” 
-
-- ​11:40AM- 12:00PM: Drew Van der Werff “Commit-Boost: standardizing proposer commitments” 
-
-- ​12PM-1PM: Lunch 
-
-- ​1:00PM-1:25PM: (Based Rollups): Joe Andrews (Aztec), Brecht (Taiko), Marek (Celo), Moderator: Justin Drake 
-
-- ​1:30PM-1:50PM: (Synchronous vs asynchronous composability): Lumi (zkSync), Jordi Baylina  (Polygon), Ye Zhang (Scroll), Bryan Pellegrino (LayerZero), Justin Drake (EF), Moderator: Ben Fisch
-
-- ​2PM-2:30PM: Daniel (Scroll) L1sload: Reading state across L2s at execution time
-
-- ​2:30PM - 3PM: Murat (Primev) Execution preconfs
-
-- 3PM - 3:30PM: Vitalik (EF) The benefits of L1 having faster block times and how to get there
-
-- 3:30PM - 4PM: Stephane (OneBalance) Bridging CAKE and Sequencer Commitments
-
-- ​4PM- 4:30PM: (Chain Abstraction and pre-confirmations) - Vitalik (EF), Sam Hart (Skip), Arjun Bhuptani (Everclear), Christopher Goes (Anoma), Moderator: Stephane
-
-- 4:30 -5PM: Shumo (Nebra) - Rollup interoperability: Is proof agregation all you need?
-
-​Workshop Schedule:
-
--​ 10AM-12PM: CAKE whiteboarding with Ankit
-
-- ​12PM- 2PM: Break
-
-- ​2PM- 3PM: Preconfirmation / Sequencer Commitments, Co-moderators: George Spasov (Limechain) and Drew Van der Werff
-
-- ​3PM- 4PM: Break
-
-- ​3:30PM-4:30PM: Sequencer & Builder Market Design, Co-moderators: Benedikt Bünz (Espresso) and Pranav Garimidi (a16z research)`,
-          image: '/br1.avif',
-          registrationLink: 'https://luma.com/sequence-cake-ethcc'
+​Please note that entry will be first-come-first-serve and the space holds 80 people total capacity.`,
+          image: '/br3.avif',
+          registrationLink: 'https://luma.com/ud8p6oww'
         },
       	{
           id: 1,
@@ -913,22 +865,70 @@ After a successful first edition of the Back to the Future Cocktail Night at ETH
           image: '/br2.avif',
           registrationLink: 'https://luma.com/backtothefuture2'
         },
-      	{
-          id: 1,
-          title: 'Ethereum United: EURO 2024 Semi-Finals Pub Nights',
-          date: '2024-07-09',
-          startTime: '19:00',
-          endTime: '01:00',
+        {
+          id: 7,
+          title: 'Sequencing x CAKE day - ETHCC Brussels',
+          date: '2024-07-07',
+          startTime: '09:00',
+          endTime: '19:00',
           timezone: 'GMT+2',
-          description: `​Hosted by Espresso Systems, Nethermind, Airchains, AltLayer, Ankr, Automata, Caldera, Cartesi, Catalyst, CyberConnect, dWallet, Fhenix, Fluent, Gelato, Hyperlane, Injective, Karnot, Kinto, Omni, ParallelFi, Plume, Polygon, Pragma, RARI, Social Network, Socket, Specular, Superposition, Synonym, Taiko, & Treasure.
+          description: `Join us for a packed, productive day of Sequencing & CAKE discussions!
 
-We are uniting the Ethereum community for two pub nights during EthCC Brussels.
+This event will have parallel talks and workshops, with a lunch break in the middle and happy hour at the end.
 
-​On July 9 & July 10 from 7pm-1am, we'll bring the open bar, food, FIFA, football jerseys (that you'll actually want to rep), and the ultimate location to watch the EURO 2024 Semi-Finals matches.
+*RSVP ONLY*
 
-​Please note that entry will be first-come-first-serve and the space holds 80 people total capacity.`,
-          image: '/br3.avif',
-          registrationLink: 'https://luma.com/ud8p6oww'
+Apply now
+
+​Speaking Schedule: 
+
+- ​9AM-9:30AM: Arrival, Breakfast & Coffee
+
+- ​9:30AM-9:35AM: Welcome Message (Ben Fisch) 
+
+- ​9:35AM-9:55AM: Justin Drake (Ethereum Foundation)  "Why is synchrony valuable?"
+
+- ​10:00AM-10:20AM: Ed Felten (Offchain Labs) "Timeboost: Ethical and Efficient Revenue from MEV" 
+
+- ​10:25AM-10:45AM: dmarz (Flashbots) "Sequencer preconfs with TEEs" 
+
+- ​10:50AM-11:10AM: Benedikt Buenz (Espresso) "On designing a marketplace for sequencing"
+
+- ​11:15AM-11:35AM: Karthik Srinivasan (Sorella Labs) "Ordering sovereign applications" 
+
+- ​11:40AM- 12:00PM: Drew Van der Werff "Commit-Boost: standardizing proposer commitments" 
+
+- ​12PM-1PM: Lunch 
+
+- ​1:00PM-1:25PM: (Based Rollups): Joe Andrews (Aztec), Brecht (Taiko), Marek (Celo), Moderator: Justin Drake 
+
+- ​1:30PM-1:50PM: (Synchronous vs asynchronous composability): Lumi (zkSync), Jordi Baylina  (Polygon), Ye Zhang (Scroll), Bryan Pellegrino (LayerZero), Justin Drake (EF), Moderator: Ben Fisch
+
+- ​2PM-2:30PM: Daniel (Scroll) L1sload: Reading state across L2s at execution time
+
+- ​2:30PM - 3PM: Murat (Primev) Execution preconfs
+
+- 3PM - 3:30PM: Vitalik (EF) The benefits of L1 having faster block times and how to get there
+
+- 3:30PM - 4PM: Stephane (OneBalance) Bridging CAKE and Sequencer Commitments
+
+- ​4PM- 4:30PM: (Chain Abstraction and pre-confirmations) - Vitalik (EF), Sam Hart (Skip), Arjun Bhuptani (Everclear), Christopher Goes (Anoma), Moderator: Stephane
+
+- 4:30 -5PM: Shumo (Nebra) - Rollup interoperability: Is proof agregation all you need?
+
+​Workshop Schedule:
+
+-​ 10AM-12PM: CAKE whiteboarding with Ankit
+
+- ​12PM- 2PM: Break
+
+- ​2PM- 3PM: Preconfirmation / Sequencer Commitments, Co-moderators: George Spasov (Limechain) and Drew Van der Werff
+
+- ​3PM- 4PM: Break
+
+- ​3:30PM-4:30PM: Sequencer & Builder Market Design, Co-moderators: Benedikt Bünz (Espresso) and Pranav Garimidi (a16z research)`,
+          image: '/br1.avif',
+          registrationLink: 'https://luma.com/sequence-cake-ethcc'
         }
       ]
     },
@@ -949,7 +949,7 @@ Need to wind down after a crazy blockchain week? Trade rallies instead of tokens
 
 ​No gear? No problem.
 
-We’ve got rackets and shuttles covered. We have 3 available badminton courts. Please wear/bring workout shoes!
+We've got rackets and shuttles covered. We have 3 available badminton courts. Please wear/bring workout shoes!
 
 ​Whether you're a seasoned player or just here for the fun, come play!
 
@@ -1007,7 +1007,7 @@ endTime: '16:00',
 timezone: 'GMT+9',
 description: `​Espresso Systems is coming to Seoul for KBW, and what better way to kick things off than with coffee on us?
 
-​Together with our ecosystem partners DSRV, Celo, Polygon Labs & CoinEasy we’re excited to bring you Espresso & Partner Brews.
+​Together with our ecosystem partners DSRV, Celo, Polygon Labs & CoinEasy we're excited to bring you Espresso & Partner Brews.
 
 ​Come enjoy a fresh cup, pick up our latest swag, get a personal color analysis, snap your Espresso-branded pic, and even unbox a blind box on the spot!
 
@@ -1032,13 +1032,13 @@ date: '2025-09-25',
 startTime: '20:00',
 endTime: '23:00',
 timezone: 'GMT+9',
-description: `​What’s a trip to Seoul without karaoke? 🎤
+description: `​What's a trip to Seoul without karaoke? 🎤
 
 Wrap up your KBW experience with a lively karaoke night, hosted by Espresso and CoinEasy. Bring your best vocals (or just your best energy) and get ready for good vibes, big laughs, and maybe even a surprise duet or two.
 
-​In need of a little liquid courage? Don't worry, we’ve got you covered. 🍹 And don’t miss out on the exclusive swag, only available at this event!
+​In need of a little liquid courage? Don't worry, we've got you covered. 🍹 And don't miss out on the exclusive swag, only available at this event!
 
-​P.S. We promise “Espresso” by Sabrina Carpenter won’t be on repeat. Pinky promise.
+​P.S. We promise "Espresso" by Sabrina Carpenter won't be on repeat. Pinky promise.
 
 More details coming soon!
 

@@ -10,14 +10,37 @@ const EventPanel = ({
   currentCityIndex, 
   onCityChange, 
   onEventChange,
-  currentEventIndex 
+  currentEventIndex,
+  currentEventType,
+  onEventTypeChange
 }) => {
   const scrollContainerRef = useRef(null);
+  const [localEventType, setLocalEventType] = useState(currentEventType);
+  
+  // Update local event type when navigating through mixed events
+  useEffect(() => {
+    const currentCity = cities[currentCityIndex];
+    if (currentCity?.eventTypes && currentCity.eventTypes[currentEventIndex]) {
+      setLocalEventType(currentCity.eventTypes[currentEventIndex]);
+    } else {
+      setLocalEventType(currentEventType);
+    }
+  }, [currentEventIndex, currentCityIndex, cities, currentEventType]);
   
   if (!isOpen || !cities || cities.length === 0) return null;
 
   const currentCity = cities[currentCityIndex];
   const currentEvent = currentCity?.events[currentEventIndex];
+  
+  // Use local event type for dynamic header changes
+  const actualEventType = localEventType;
+
+  // Check if current city has both past and upcoming events
+  const hasBothEventTypes = currentCity?.hasBoth;
+  
+  // Remove the switching logic - mixed cities show all events in sequence
+  const isViewingUpcoming = actualEventType === 'upcoming';
+  const isViewingPast = actualEventType === 'past';
 
   const scrollToTop = () => {
     if (scrollContainerRef.current) {
@@ -28,22 +51,77 @@ const EventPanel = ({
     }
   };
 
+  // Import event data to get city lists for mixed city navigation
+  const { eventData, getAllCities } = require('../../data/events');
+  const { pastCities, upcomingCities } = getAllCities();
+
   const handleNextCity = () => {
-    const nextIndex = (currentCityIndex + 1) % cities.length;
-    onCityChange(nextIndex);
+    // For mixed cities, we need to navigate based on the current event type being viewed
+    if (eventType === 'mixed') {
+      // Get the appropriate city list based on current event type
+      const cityList = currentEventType === 'past' ? pastCities : upcomingCities;
+      
+      // Find current city in the appropriate list
+      const currentCityInList = cityList.findIndex(city => {
+        const name = typeof city === 'string' ? city : city.name;
+        return name === currentCity.name;
+      });
+      
+      if (currentCityInList !== -1) {
+        const nextIndex = (currentCityInList + 1) % cityList.length;
+        onCityChange(nextIndex);
+      }
+    } else {
+      // Normal navigation for single-type cities
+      const nextIndex = (currentCityIndex + 1) % cities.length;
+      onCityChange(nextIndex);
+    }
     scrollToTop();
   };
 
   const handlePrevCity = () => {
-    const prevIndex = currentCityIndex === 0 ? cities.length - 1 : currentCityIndex - 1;
-    onCityChange(prevIndex);
+    // For mixed cities, we need to navigate based on the current event type being viewed
+    if (eventType === 'mixed') {
+      // Get the appropriate city list based on current event type
+      const cityList = currentEventType === 'past' ? pastCities : upcomingCities;
+      
+      // Find current city in the appropriate list
+      const currentCityInList = cityList.findIndex(city => {
+        const name = typeof city === 'string' ? city : city.name;
+        return name === currentCity.name;
+      });
+      
+      if (currentCityInList !== -1) {
+        const prevIndex = currentCityInList === 0 ? cityList.length - 1 : currentCityInList - 1;
+        onCityChange(prevIndex);
+      }
+    } else {
+      // Normal navigation for single-type cities
+      const prevIndex = currentCityIndex === 0 ? cities.length - 1 : currentCityIndex - 1;
+      onCityChange(prevIndex);
+    }
     scrollToTop();
   };
 
   const handleNextEvent = () => {
     if (currentCity && currentEventIndex < currentCity.events.length - 1) {
-      onEventChange(currentEventIndex + 1);
-      // Use setTimeout to ensure state update happens first
+      const nextIndex = currentEventIndex + 1;
+      onEventChange(nextIndex);
+      
+      // Update local event type based on the next event (only for mixed cities)
+      if (currentCity.eventTypes && currentCity.eventTypes[nextIndex]) {
+        const newEventType = currentCity.eventTypes[nextIndex];
+        setLocalEventType(newEventType);
+        
+        // For mixed cities, only update parent if it's a different event type
+        if (currentCity.hasBoth && onEventTypeChange) {
+          const currentEventTypeActual = currentCity.eventTypes[currentEventIndex];
+          if (newEventType !== currentEventTypeActual) {
+            onEventTypeChange(newEventType);
+          }
+        }
+      }
+      
       setTimeout(() => {
         scrollToTop();
       }, 0);
@@ -52,12 +130,36 @@ const EventPanel = ({
 
   const handlePrevEvent = () => {
     if (currentEventIndex > 0) {
-      onEventChange(currentEventIndex - 1);
-      // Use setTimeout to ensure state update happens first
+      const prevIndex = currentEventIndex - 1;
+      onEventChange(prevIndex);
+      
+      // Update local event type based on the previous event (only for mixed cities)
+      if (currentCity.eventTypes && currentCity.eventTypes[prevIndex]) {
+        const newEventType = currentCity.eventTypes[prevIndex];
+        setLocalEventType(newEventType);
+        
+        // For mixed cities, only update parent if it's a different event type
+        if (currentCity.hasBoth && onEventTypeChange) {
+          const currentEventTypeActual = currentCity.eventTypes[currentEventIndex];
+          if (newEventType !== currentEventTypeActual) {
+            onEventTypeChange(newEventType);
+          }
+        }
+      }
+      
       setTimeout(() => {
         scrollToTop();
       }, 0);
     }
+  };
+
+  const handleSwitchEventType = () => {
+    const newEventType = isViewingUpcoming ? 'past' : 'upcoming';
+    onEventTypeChange(newEventType);
+    onEventChange(0);
+    setTimeout(() => {
+      scrollToTop();
+    }, 0);
   };
 
   const handleRegisterClick = () => {
@@ -113,6 +215,33 @@ const EventPanel = ({
   const hasValidTime = currentEvent?.startTime && currentEvent?.endTime;
   const formattedDate = formatDate(currentEvent?.date);
 
+  // Get current event counts
+  const totalEvents = currentCity?.events.length || 0;
+
+  // Determine if we can navigate to next/prev events
+  const canGoNext = currentEventIndex < totalEvents - 1;
+  const canGoPrev = currentEventIndex > 0;
+
+  // Determine if we can navigate to next/prev cities
+  const getCityNavigationInfo = () => {
+    if (eventType === 'mixed') {
+      // For mixed cities, check the appropriate city list
+      const cityList = currentEventType === 'past' ? pastCities : upcomingCities;
+      return {
+        canNavigate: cityList.length > 1,
+        totalCities: cityList.length
+      };
+    } else {
+      // For single-type cities, use the cities array
+      return {
+        canNavigate: cities.length > 1,
+        totalCities: cities.length
+      };
+    }
+  };
+
+  const cityNavInfo = getCityNavigationInfo();
+
   return (
     <div className="absolute right-0 top-0 bottom-0 w-full sm:w-[420px] bg-panel-bg shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col">
       <style jsx>{`
@@ -138,10 +267,10 @@ const EventPanel = ({
       `}</style>
      
       <div className={`w-full py-3 px-4 text-center ${
-        eventType === 'past' ? 'bg-espresso-dark' : 'bg-espresso-light'
+        actualEventType === 'past' ? 'bg-espresso-dark' : 'bg-espresso-light'
       }`}>
         <h2 className="text-white font-bold text-lg">
-          {eventType === 'past' ? 'Past Events' : 'Upcoming Events'}
+          {actualEventType === 'past' ? 'Past Events' : 'Upcoming Events'}
         </h2>
       </div>
 
@@ -151,9 +280,9 @@ const EventPanel = ({
           <button
             onClick={handlePrevCity}
             className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
-            disabled={cities.length <= 1}
+            disabled={!cityNavInfo.canNavigate}
           >
-            <ChevronLeft size={20} className={cities.length <= 1 ? 'text-gray-400' : 'text-gray-600'} />
+            <ChevronLeft size={20} className={!cityNavInfo.canNavigate ? 'text-gray-400' : 'text-gray-600'} />
           </button>
           <div className="text-center">
             <h2 className="font-bold text-lg text-gray-900">{currentCity?.name}</h2>
@@ -162,9 +291,9 @@ const EventPanel = ({
           <button
             onClick={handleNextCity}
             className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
-            disabled={cities.length <= 1}
+            disabled={!cityNavInfo.canNavigate}
           >
-            <ChevronRight size={20} className={cities.length <= 1 ? 'text-gray-400' : 'text-gray-600'} />
+            <ChevronRight size={20} className={!cityNavInfo.canNavigate ? 'text-gray-400' : 'text-gray-600'} />
           </button>
         </div>
         <button
@@ -181,23 +310,22 @@ const EventPanel = ({
           {currentEvent && (
             <div className="space-y-4">
             
-
             {/* Event Image */}
             <div className="w-full bg-gray-50 flex items-center justify-center">
-  <Image
-    key={`${currentCityIndex}-${currentEventIndex}-${currentEvent.image}`}
-    src={currentEvent.image}
-    alt={currentEvent.title}
-    width={279}
-    height={279}
-    className="object-cover rounded-lg"
-    onError={(e) => {
-      e.target.src = '/images/placeholder-event.jpg';
-    }}
-    placeholder="blur"
-    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAQIAAxEhkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyOiKFhX2XTk" // Small blur placeholder
-  />
-</div>
+              <Image
+                key={`${currentCityIndex}-${currentEventIndex}-${currentEvent.image}`}
+                src={currentEvent.image}
+                alt={currentEvent.title}
+                width={279}
+                height={279}
+                className="object-cover rounded-lg"
+                onError={(e) => {
+                  e.target.src = '/images/placeholder-event.jpg';
+                }}
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAQIAAxEhkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyOiKFhX2XTk"
+              />
+            </div>
 
             {/* Event Details */}
             <div className="space-y-3">
@@ -207,7 +335,11 @@ const EventPanel = ({
               {(hasValidDate || hasValidTime) && (
                 <div className="flex items-center space-x-3">
                   {/* Calendar Icon with Month and Date */}
-                  <div className="relative flex-shrink-0 w-12 h-12 bg-gradient-to-br from-espresso-light to-espresso-dark rounded-lg flex flex-col items-center justify-center text-white shadow-sm">
+                  <div className={`relative flex-shrink-0 w-12 h-12 rounded-lg flex flex-col items-center justify-center text-white shadow-sm ${
+                    actualEventType === 'past' 
+                      ? 'bg-gradient-to-br from-espresso-dark to-gray-800' 
+                      : 'bg-gradient-to-br from-espresso-light to-espresso-dark'
+                  }`}>
                     <span className="text-xs font-medium leading-none">{getMonthAbbr(currentEvent.date)}</span>
                     <span className="text-lg font-bold leading-none">{getDateNumber(currentEvent.date)}</span>
                   </div>
@@ -215,13 +347,15 @@ const EventPanel = ({
                   {/* Date and Time Text */}
                   <div className="space-y-1">
                     {hasValidDate && (
-                      <p className="text-espresso-light font-medium">{formattedDate}</p>
+                      <p className={`font-medium ${actualEventType === 'past' ? 'text-espresso-dark' : 'text-espresso-light'}`}>
+                        {formattedDate}
+                      </p>
                     )}
                     {!hasValidDate && hasValidTime && (
                       <p className="text-gray-500 font-medium italic">Date TBD</p>
                     )}
                     {hasValidTime && (
-                      <p className="text-espresso-light font-medium">
+                      <p className={`font-medium ${actualEventType === 'past' ? 'text-espresso-dark' : 'text-espresso-light'}`}>
                         {formatTime(currentEvent.startTime, currentEvent.endTime, currentEvent.timezone)}
                       </p>
                     )}
@@ -241,7 +375,7 @@ const EventPanel = ({
               )}
 
               {/* Past Event Notice */}
-             {eventType === 'past' && hasValidDate && (
+              {actualEventType === 'past' && hasValidDate && (
                 <div className="pt-3">
                   <div className="bg-red-50 border border-red-200 p-3 rounded-lg">
                     <p className="text-red-700 font-medium text-sm">
@@ -257,7 +391,7 @@ const EventPanel = ({
                 </div>
               )}
 
-              {/* Register Now Button */}
+              {/* Register Now Button - Now shows for all events with registration link */}
               {currentEvent.registrationLink && (
                 <div className="pt-3">
                   <button
@@ -277,13 +411,13 @@ const EventPanel = ({
             </div>
 
             {/* Event Navigation */}
-            {currentCity.events.length > 1 && (
+            {(totalEvents > 1 || hasBothEventTypes) && (
               <div className="flex justify-between items-center pt-3 border-t border-gray-200">
                 <button
                   onClick={handlePrevEvent}
-                  disabled={currentEventIndex === 0}
+                  disabled={!canGoPrev}
                   className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-                    currentEventIndex === 0
+                    !canGoPrev
                       ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                       : 'bg-gray-200 text-gray-700 hover:bg-gray-300 hover:scale-105'
                   }`}
@@ -291,15 +425,15 @@ const EventPanel = ({
                   Prev Event
                 </button>
                 <span className="text-sm text-gray-600 bg-gray-50 px-3 py-1 rounded-full">
-                  {currentEventIndex + 1} of {currentCity.events.length}
+                  {currentEventIndex + 1} of {totalEvents}
                 </span>
                 <button
                   onClick={handleNextEvent}
-                  disabled={currentEventIndex === currentCity.events.length - 1}
+                  disabled={!canGoNext}
                   className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-                    currentEventIndex === currentCity.events.length - 1
+                    !canGoNext
                       ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                      : 'bg-espresso-light text-white hover:bg-espresso-dark hover:scale-105 shadow-md hover:shadow-lg'
+                      : `${actualEventType === 'past' ? 'bg-espresso-dark' : 'bg-espresso-light'} text-white hover:${actualEventType === 'past' ? 'bg-gray-800' : 'bg-espresso-dark'} hover:scale-105 shadow-md hover:shadow-lg`
                   }`}
                 >
                   Next Event
@@ -310,7 +444,7 @@ const EventPanel = ({
           )}
         </div>
       </div>
-      </div>
+    </div>
   );
 };
 

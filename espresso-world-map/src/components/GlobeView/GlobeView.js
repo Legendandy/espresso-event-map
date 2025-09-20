@@ -144,127 +144,148 @@ const MapboxGlobeView = forwardRef(({ onCityClick, selectedCity }, ref) => {
     try {
       let markerCount = 0;
 
-      // Add past events markers
+      // Get all unique cities and determine their event types
+      const allCities = {};
+      
+      // Track cities with past events
       if (eventData.pastEvents) {
-        console.log('Adding past event markers to globe...');
         Object.entries(eventData.pastEvents).forEach(([cityName, cityData]) => {
-          console.log(`Adding past event marker for: ${cityName}`, cityData);
-          
-          if (!cityData.coordinates || !Array.isArray(cityData.coordinates)) {
-            console.error(`Invalid coordinates for ${cityName}:`, cityData.coordinates);
-            return;
-          }
-
-          // Create popup for hover
-          const popup = new mapboxgl.Popup({ 
-            offset: 25,
-            closeButton: false,
-            closeOnClick: false
-          })
-            .setHTML(`
-              <div style="font-family: sans-serif; padding: 8px;">
-                <strong style="color: #270903;">${cityName}</strong><br/>
-                <span style="color: #666;">${cityData.country}</span><br/>
-                <span style="color: #270903; font-size: 12px;">Past Events</span>
-              </div>
-            `);
-
-          const marker = new mapboxgl.Marker({
-            color: '#270903',
-            scale: 1.2 // Slightly larger for globe view
-          })
-            .setLngLat(cityData.coordinates)
-            .addTo(map.current);
-
-          // Get marker element for hover events
-          const markerElement = marker.getElement();
-          
-          // Add hover events
-          markerElement.addEventListener('mouseenter', () => {
-            popup.setLngLat(cityData.coordinates).addTo(map.current);
-          });
-          
-          markerElement.addEventListener('mouseleave', () => {
-            popup.remove();
-          });
-
-          // Click event
-          markerElement.addEventListener('click', () => {
-            console.log(`Clicked past event: ${cityName}`);
-            onCityClick && onCityClick(cityName, 'past');
-            // Fly to location with nice animation
-            map.current.flyTo({
-              center: cityData.coordinates,
-              zoom: 8,
-              duration: 3000,
-              essential: true
-            });
-          });
-          
-          markerCount++;
+          if (!cityData.coordinates || !Array.isArray(cityData.coordinates)) return;
+          allCities[cityName] = {
+            ...cityData,
+            hasPast: true,
+            hasUpcoming: false
+          };
         });
       }
 
-      // Add upcoming events markers
+      // Track cities with upcoming events (and update if they also have past events)
       if (eventData.upcomingEvents) {
-        console.log('Adding upcoming event markers to globe...');
         Object.entries(eventData.upcomingEvents).forEach(([cityName, cityData]) => {
-          console.log(`Adding upcoming event marker for: ${cityName}`, cityData);
+          if (!cityData.coordinates || !Array.isArray(cityData.coordinates)) return;
           
-          if (!cityData.coordinates || !Array.isArray(cityData.coordinates)) {
-            console.error(`Invalid coordinates for ${cityName}:`, cityData.coordinates);
-            return;
+          if (allCities[cityName]) {
+            // City already exists with past events, mark it as having both
+            allCities[cityName].hasUpcoming = true;
+          } else {
+            // New city with only upcoming events
+            allCities[cityName] = {
+              ...cityData,
+              hasPast: false,
+              hasUpcoming: true
+            };
           }
-
-          // Create popup for hover
-          const popup = new mapboxgl.Popup({ 
-            offset: 25,
-            closeButton: false,
-            closeOnClick: false
-          })
-            .setHTML(`
-              <div style="font-family: sans-serif; padding: 8px;">
-                <strong style="color: #DE9E67;">${cityName}</strong><br/>
-                <span style="color: #666;">${cityData.country}</span><br/>
-                <span style="color: #DE9E67; font-size: 12px;">Upcoming Events</span>
-              </div>
-            `);
-
-          const marker = new mapboxgl.Marker({
-            color: '#DE9E67',
-            scale: 1.2 // Slightly larger for globe view
-          })
-            .setLngLat(cityData.coordinates)
-            .addTo(map.current);
-
-          // Get marker element for hover events
-          const markerElement = marker.getElement();
-          
-          // Add hover events
-          markerElement.addEventListener('mouseenter', () => {
-            popup.setLngLat(cityData.coordinates).addTo(map.current);
-          });
-          
-          markerElement.addEventListener('mouseleave', () => {
-            popup.remove();
-          });
-
-          // Click event
-          markerElement.addEventListener('click', () => {
-            console.log(`Clicked upcoming event: ${cityName}`);
-            onCityClick && onCityClick(cityName, 'upcoming');
-            // Fly to location with nice animation
-            map.current.flyTo({
-              center: cityData.coordinates,
-              zoom: 8,
-              duration: 3000,
-              essential: true
-            });
-          });
-          
-          markerCount++;
         });
       }
+
+      // Create markers for all cities
+      Object.entries(allCities).forEach(([cityName, cityData]) => {
+        const hasBoth = cityData.hasPast && cityData.hasUpcoming;
+        const hasOnlyPast = cityData.hasPast && !cityData.hasUpcoming;
+        const hasOnlyUpcoming = !cityData.hasPast && cityData.hasUpcoming;
+
+        let markerColor, popupText, eventType;
+
+        if (hasBoth) {
+          markerColor = '#DE9E67'; // Use upcoming color as base for mixed markers
+          popupText = 'Past & Upcoming Events';
+          eventType = 'mixed';
+        } else if (hasOnlyPast) {
+          markerColor = '#270903';
+          popupText = 'Past Events';
+          eventType = 'past';
+        } else {
+          markerColor = '#DE9E67';
+          popupText = 'Upcoming Events';
+          eventType = 'upcoming';
+        }
+
+        const popup = new mapboxgl.Popup({ 
+          offset: 25,
+          closeButton: false,
+          closeOnClick: false
+        })
+          .setHTML(`
+            <div style="font-family: sans-serif; padding: 8px;">
+              <strong style="color: ${hasBoth ? '#DE9E67' : (hasOnlyPast ? '#270903' : '#DE9E67')};">${cityName}</strong><br/>
+              <span style="color: #666;">${cityData.country}</span><br/>
+              <span style="color: ${hasBoth ? '#DE9E67' : (hasOnlyPast ? '#270903' : '#DE9E67')}; font-size: 12px;">${popupText}</span>
+            </div>
+          `);
+
+        const marker = new mapboxgl.Marker({
+          color: markerColor,
+          scale: 1.2 // Slightly larger for globe view
+        })
+          .setLngLat(cityData.coordinates)
+          .addTo(map.current);
+
+        const markerElement = marker.getElement();
+        markerElement._marker = marker;
+        
+        // Apply mixed marker styling if the city has both event types
+        if (hasBoth) {
+          markerElement.classList.add('mixed-marker');
+          
+          // Wait for the SVG to be rendered, then modify it
+          setTimeout(() => {
+            const svg = markerElement.querySelector('svg');
+            if (svg) {
+              // Create the gradient definition
+              const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+              const gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+              gradient.setAttribute('id', `mixedGradient-${cityName.replace(/\s+/g, '')}`);
+              gradient.setAttribute('x1', '0%');
+              gradient.setAttribute('y1', '0%');
+              gradient.setAttribute('x2', '100%');
+              gradient.setAttribute('y2', '0%');
+              
+              const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+              stop1.setAttribute('offset', '50%');
+              stop1.setAttribute('stop-color', '#270903');
+              
+              const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+              stop2.setAttribute('offset', '50%');
+              stop2.setAttribute('stop-color', '#DE9E67');
+              
+              gradient.appendChild(stop1);
+              gradient.appendChild(stop2);
+              defs.appendChild(gradient);
+              svg.insertBefore(defs, svg.firstChild);
+              
+              // Apply the gradient to the path
+              const path = svg.querySelector('path');
+              if (path) {
+                path.setAttribute('fill', `url(#mixedGradient-${cityName.replace(/\s+/g, '')})`);
+              }
+            }
+          }, 100);
+        }
+        
+        // Add hover events
+        markerElement.addEventListener('mouseenter', () => {
+          popup.setLngLat(cityData.coordinates).addTo(map.current);
+        });
+        
+        markerElement.addEventListener('mouseleave', () => {
+          popup.remove();
+        });
+
+        // Click event
+        markerElement.addEventListener('click', () => {
+          console.log(`Clicked ${eventType} event: ${cityName}`);
+          onCityClick && onCityClick(cityName, eventType);
+          // Fly to location with nice animation
+          map.current.flyTo({
+            center: cityData.coordinates,
+            zoom: 8,
+            duration: 3000,
+            essential: true
+          });
+        });
+        
+        markerCount++;
+      });
 
       console.log(`✅ SUCCESS: ${markerCount} markers added to globe!`);
 
